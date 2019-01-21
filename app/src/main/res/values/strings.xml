@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Погода</string>
     <string name="current_weather">Today snowy, -6</string>
+    <string name="novosibirsk">Новосибирск</string>
+    <string name="moscow">Москва</string>
+    <string name="spb">Санкт-Петербург</string>
+
+    <string name="novosibrsk_weather">Солнечно, небольшой ветер, -20</string>
+    <string name="moscow_weather">Солнечно, штиль, -10</string>
+    <string name="spb_weather">Облачно, умеренный ветер, -18</string>
 </resources>
