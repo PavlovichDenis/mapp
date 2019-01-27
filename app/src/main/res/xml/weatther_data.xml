@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Weather>
+    <City name="Новосибирск">
+        <Weather>
+            <Wind direction="ю/в" speed = "7" unit = "м/с" />
+            <Temperature value="-7" unit="C"/>
+            <Precipitation value="слабый снег" />
+            <Pressure value="760" unit="мм р.ст."/>
+            <Humidity value="40" unit="%"/>
+        </Weather>
+    </City>
+
+    <City name="Санкт-Петербург">
+        <Weather>
+            <Wind direction="с/з" speed = "7" unit = "м/с" />
+            <Temperature value="-27" unit="C"/>
+            <Precipitation value="без осадков" />
+            <Pressure value="760" unit="мм р.ст."/>
+            <Humidity value="75" unit="%"/>
+        </Weather>
+    </City>
+
+    <City name="Москва">
+        <Weather>
+            <Wind direction="c/з" speed = "7" unit = "м/с" />
+            <Temperature value="-15" unit="C"/>
+            <Precipitation value="сильный снег" />
+            <Pressure value="760" unit="мм р.ст."/>
+            <Humidity value="75" unit="%"/>
+        </Weather>
+    </City>
+
+    <City name="Казань">
+        <Weather>
+            <Wind direction="ю/в" speed = "7" unit = "м/с" />
+            <Temperature value="-4" unit="C"/>
+            <Precipitation value="без осадков" />
+            <Pressure value="760" unit="мм р.ст."/>
+            <Humidity value="75" unit="%"/>
+        </Weather>
+    </City>
+</Weather>
