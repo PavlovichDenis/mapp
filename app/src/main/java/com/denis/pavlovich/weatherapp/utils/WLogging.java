@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 public final class WLogging {
 
-    private static final String TAG = "WeatherApp";
+    private static final String TAG = WConstants.TAG;
 
     public static void makeToast(Context context, String toast) {
         Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
