@@ -14,6 +14,7 @@ import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.view.WSimpleView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WActivity extends WAbstractActivity {
@@ -37,6 +38,14 @@ public class WActivity extends WAbstractActivity {
         }
     };
 
+    private List<String> getList() {
+        ArrayList<String> list = new ArrayList<>();
+        for (WeatherInfo wi : weatherInfos) {
+            list.add(wi.getCity());
+        }
+        return list;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +53,8 @@ public class WActivity extends WAbstractActivity {
         WDataProvider dataProvider = new WResourceDataProviderImpl(getResources());
         weatherInfos = dataProvider.getWeatherData();
         ListView listView = findViewById(R.id.cities);
-
-        ArrayAdapter<WeatherInfo> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, weatherInfos);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, getList());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(onClickListener);
 
