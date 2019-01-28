@@ -118,11 +118,4 @@ public class WeatherInfo implements Serializable {
         this.humidityUnit = humidityUnit;
     }
 
-    @Override
-    public String toString() {
-        if (city == null) {
-            return super.toString();
-        }
-        return city;
-    }
 }

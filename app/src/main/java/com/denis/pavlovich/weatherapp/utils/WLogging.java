@@ -13,7 +13,7 @@ public final class WLogging {
     }
 
     public static void logToast(String message) {
-        Log.i(TAG, message);
+        Log.d(TAG, message);
     }
 
     public static void complexToast(Context context, String toast) {
