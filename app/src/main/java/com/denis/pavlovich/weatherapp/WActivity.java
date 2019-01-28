@@ -53,7 +53,6 @@ public class WActivity extends WAbstractActivity {
         WDataProvider dataProvider = new WResourceDataProviderImpl(getResources());
         weatherInfos = dataProvider.getWeatherData();
         ListView listView = findViewById(R.id.cities);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, getList());
         listView.setAdapter(adapter);

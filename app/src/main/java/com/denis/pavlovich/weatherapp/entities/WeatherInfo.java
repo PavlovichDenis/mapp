@@ -117,5 +117,4 @@ public class WeatherInfo implements Serializable {
     public void setHumidityUnit(String humidityUnit) {
         this.humidityUnit = humidityUnit;
     }
-
 }
