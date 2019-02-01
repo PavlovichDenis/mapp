@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:id="@+id/temperatureView"
-            style="@style/infoWetherParams">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/temperatureText"
@@ -33,7 +33,7 @@
 
         <LinearLayout
             android:id="@+id/windView"
-            style="@style/infoWetherParams">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/windText"
@@ -48,7 +48,7 @@
 
         <LinearLayout
             android:id="@+id/pressureView"
-            style="@style/infoWetherParams">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/pressureText"
@@ -63,7 +63,7 @@
 
         <LinearLayout
             android:id="@+id/humidityView"
-            style="@style/infoWetherParams">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/humidityText"
@@ -78,7 +78,7 @@
 
         <LinearLayout
             android:id="@+id/precipitationView"
-            style="@style/infoWetherParams">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/precipitationText"

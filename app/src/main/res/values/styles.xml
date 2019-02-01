@@ -39,14 +39,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
         <item name="android:paddingStart">@dimen/sp10</item>
-        <item name="android:textSize">@dimen/sp20</item>
+        <item name="android:textSize">@dimen/sp30</item>
     </style>
 
     <style name="infoWeatherParameter">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">@dimen/sp10</item>
-        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:textSize">@dimen/sp20</item>
     </style>
 
     <style name="infoWeatherValue">
@@ -54,12 +54,13 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/holo_green_dark</item>
-        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:textSize">@dimen/sp20</item>
     </style>
 
-    <style name="infoWetherParams">
+    <style name="infoWeatherParams">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:orientation">horizontal</item>
     </style>
 
