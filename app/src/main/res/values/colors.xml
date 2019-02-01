@@ -2,6 +2,12 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="colorMain">#AC44</color>
+    <color name="colorAccent">#07F80A</color>
+    <color name="colorForeground">#FBFCFB</color>
+
+    <color name="colorPrimaryThemeDark">#848F8F</color>
+    <color name="colorPrimaryThemeVeryDark">#1F3331</color>
+    <color name="colorAccentThemeDark">#09800B</color>
+    <color name="colorForegroundDark">#D6DAD6</color>
+
 </resources>

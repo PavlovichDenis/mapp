@@ -4,11 +4,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_weather"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_weather"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/LightTheme">
+        <activity
+            android:name=".WActivitySettings"
+            android:label="@string/title_activity_wsettings"/>
         <activity android:name=".WActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,7 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WActivityInfo"/>
+        <activity android:name=".WActivityInfo" />
+        <activity
+            android:name=".WActivityAbout"
+            android:label="@string/actionAbout"
+            android:theme="@style/Theme.AppCompat.Dialog" />
     </application>
 
 </manifest>
