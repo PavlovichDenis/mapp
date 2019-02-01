@@ -10,7 +10,7 @@ import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.view.WSimpleView;
 
 
-public class WActivityInfo extends WAbstractActivity {
+public class WActivityInfo extends WAbstractActivityWithThemeSupport {
 
     private void setVisible(View view, boolean visible) {
         if (visible) {
@@ -23,6 +23,7 @@ public class WActivityInfo extends WAbstractActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme(getApplicationTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winfo);
         TextView textView = findViewById(R.id.cityName);

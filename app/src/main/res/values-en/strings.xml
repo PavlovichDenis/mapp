@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">The weather</string>
+
+    <string name="showWindText">Show wind</string>
+    <string name="showPressureText">Show pressure</string>
+    <string name="showHumidityText">Show humidity</string>
+    <string name="cities">The weather in city</string>
+    <string name="actionTheme">Theme</string>
+    <string name="actionAbout">About programm</string>
+    <string name="aboutText">v 1.0</string>
+    <string name="author">© Pavlovich Denis</string>
+
+    <string name="temperature">"Temperature:"</string>
+    <string name="precipitation">"Precipitation:"</string>
+    <string name="wind">"Wind              :"</string>
+    <string name="humidity">"Humidity       :"</string>
+    <string name="pressure">"Pressure       :"</string>
+    <string name="title_activity_wsettings">Settings</string>
+    <string name="lightTeme">Light theme</string>
+    <string name="darkTheme">Dark theme</string>
+</resources>

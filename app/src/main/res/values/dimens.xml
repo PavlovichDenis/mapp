@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="sp16">16sp</dimen>
+    <dimen name="sp18">18sp</dimen>
+    <dimen name="sp10">10sp</dimen>
+    <dimen name="sp20">20sp</dimen>
+    <dimen name="sp30">30sp</dimen>
+    <dimen name="sp08">08sp</dimen>
+</resources>

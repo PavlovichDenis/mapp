@@ -12,133 +12,83 @@
 
         <TextView
             android:id="@+id/cityName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/cities"
-            android:gravity="left"
-            android:paddingLeft="8sp"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
+            style="@style/infoCities" />
 
         <LinearLayout
             android:id="@+id/temperatureView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/temperatureText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/temperature"
-                android:paddingLeft="16sp"
-                android:textSize="20sp" />
+                style="@style/infoWeatherParameter" />
 
             <TextView
                 android:id="@+id/temperatureValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text=""
-                android:gravity="center"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="20sp"/>
+                style="@style/infoWeatherValue" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/windView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/windText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16sp"
                 android:text="@string/wind"
-                android:textSize="20sp" />
+                style="@style/infoWeatherParameter" />
 
             <TextView
                 android:id="@+id/windValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text=""
-                android:gravity="center"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="20sp" />
+                style="@style/infoWeatherValue" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pressureView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/pressureText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16sp"
                 android:text="@string/pressure"
-                android:textSize="20sp" />
+                style="@style/infoWeatherParameter" />
 
             <TextView
                 android:id="@+id/pressureValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text=""
-                android:gravity="center"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="20sp" />
+                style="@style/infoWeatherValue" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/humidityView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/humidityText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16sp"
                 android:text="@string/humidity"
-                android:textSize="20sp" />
+                style="@style/infoWeatherParameter" />
 
             <TextView
                 android:id="@+id/humidityValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text=""
-                android:gravity="center"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="20sp" />
+                style="@style/infoWeatherValue" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/precipitationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            style="@style/infoWeatherParams">
 
             <TextView
                 android:id="@+id/precipitationText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16sp"
                 android:text="@string/precipitation"
-                android:textSize="20sp" />
+                style="@style/infoWeatherParameter" />
 
             <TextView
                 android:id="@+id/precipitationValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text=""
-                android:gravity="center"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="20sp" />
+                style="@style/infoWeatherValue" />
         </LinearLayout>
 
 
