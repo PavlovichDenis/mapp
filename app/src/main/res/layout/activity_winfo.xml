@@ -1,97 +1,108 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/checks"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".WActivityInfo">
 
+    <TextView
+        android:id="@+id/cityName"
+        style="@style/infoCities"
+        android:text="@string/cities" />
+
     <LinearLayout
-        android:id="@+id/checks"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/temperatureView"
+        style="@style/infoWeatherParams">
 
         <TextView
-            android:id="@+id/cityName"
-            android:text="@string/cities"
-            style="@style/infoCities" />
+            android:id="@+id/temperatureText"
+            style="@style/infoWeatherParameter"
+            android:text="@string/temperature" />
 
-        <LinearLayout
-            android:id="@+id/temperatureView"
-            style="@style/infoWeatherParams">
-
-            <TextView
-                android:id="@+id/temperatureText"
-                android:text="@string/temperature"
-                style="@style/infoWeatherParameter" />
-
-            <TextView
-                android:id="@+id/temperatureValue"
-                android:text=""
-                style="@style/infoWeatherValue" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/windView"
-            style="@style/infoWeatherParams">
-
-            <TextView
-                android:id="@+id/windText"
-                android:text="@string/wind"
-                style="@style/infoWeatherParameter" />
-
-            <TextView
-                android:id="@+id/windValue"
-                android:text=""
-                style="@style/infoWeatherValue" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/pressureView"
-            style="@style/infoWeatherParams">
-
-            <TextView
-                android:id="@+id/pressureText"
-                android:text="@string/pressure"
-                style="@style/infoWeatherParameter" />
-
-            <TextView
-                android:id="@+id/pressureValue"
-                android:text=""
-                style="@style/infoWeatherValue" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/humidityView"
-            style="@style/infoWeatherParams">
-
-            <TextView
-                android:id="@+id/humidityText"
-                android:text="@string/humidity"
-                style="@style/infoWeatherParameter" />
-
-            <TextView
-                android:id="@+id/humidityValue"
-                android:text=""
-                style="@style/infoWeatherValue" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/precipitationView"
-            style="@style/infoWeatherParams">
-
-            <TextView
-                android:id="@+id/precipitationText"
-                android:text="@string/precipitation"
-                style="@style/infoWeatherParameter" />
-
-            <TextView
-                android:id="@+id/precipitationValue"
-                android:text=""
-                style="@style/infoWeatherValue" />
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/temperatureValue"
+            style="@style/infoWeatherValue"
+            android:text="" />
 
     </LinearLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/windView"
+        style="@style/infoWeatherParams">
+
+        <TextView
+            android:id="@+id/windText"
+            style="@style/infoWeatherParameter"
+            android:text="@string/wind" />
+
+        <TextView
+            android:id="@+id/windValue"
+            style="@style/infoWeatherValue"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pressureView"
+        style="@style/infoWeatherParams">
+
+        <TextView
+            android:id="@+id/pressureText"
+            style="@style/infoWeatherParameter"
+            android:text="@string/pressure" />
+
+        <TextView
+            android:id="@+id/pressureValue"
+            style="@style/infoWeatherValue"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/humidityView"
+        style="@style/infoWeatherParams">
+
+        <TextView
+            android:id="@+id/humidityText"
+            style="@style/infoWeatherParameter"
+            android:text="@string/humidity" />
+
+        <TextView
+            android:id="@+id/humidityValue"
+            style="@style/infoWeatherValue"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/precipitationView"
+        style="@style/infoWeatherParams">
+
+        <TextView
+            android:id="@+id/precipitationText"
+            style="@style/infoWeatherParameter"
+            android:text="@string/precipitation" />
+
+        <TextView
+            android:id="@+id/precipitationValue"
+            style="@style/infoWeatherValue"
+            android:text="" />
+    </LinearLayout>
+
+    <FrameLayout style="@style/frameButtonStyle">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/sendToFriendButton"
+            style="@style/buttonStyle.D"
+            android:text="@string/sendToFriend" />
+
+    </FrameLayout>
+
+    <FrameLayout style="@style/frameButtonStyle">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/lookWeatherInInternet"
+            style="@style/buttonStyle.D.D2"
+            android:text="@string/lookWetherInInternet" />
+
+    </FrameLayout>
+</LinearLayout>
+

@@ -9,5 +9,6 @@
     <color name="colorPrimaryThemeVeryDark">#1F3331</color>
     <color name="colorAccentThemeDark">#09800B</color>
     <color name="colorForegroundDark">#D6DAD6</color>
+    <color name="colorBlue">#1F84E9</color>
 
 </resources>
