@@ -83,13 +83,15 @@
     </style>
 
     <style name="buttonStyle.D.D2">
-        <item name="android:background">@color/colorAccentThemeDark</item>
+        <item name="android:background">@color/colorGreen</item>
     </style>
 
     <style name="frameButtonStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">@dimen/sp02</item>
+        <item name="android:paddingLeft">@dimen/sp10</item>
+        <item name="android:paddingRight">@dimen/sp10</item>
     </style>
 
 </resources>
