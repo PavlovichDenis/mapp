@@ -71,4 +71,27 @@
         <item name="android:textSize">@dimen/sp30</item>
     </style>
 
+    <style name="buttonStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@color/colorBlue</item>
+    </style>
+
+    <style name="buttonStyle.D">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sp16</item>
+    </style>
+
+    <style name="buttonStyle.D.D2">
+        <item name="android:background">@color/colorGreen</item>
+    </style>
+
+    <style name="frameButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/sp02</item>
+        <item name="android:paddingLeft">@dimen/sp10</item>
+        <item name="android:paddingRight">@dimen/sp10</item>
+    </style>
+
 </resources>

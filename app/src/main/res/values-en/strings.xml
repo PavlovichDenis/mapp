@@ -19,4 +19,8 @@
     <string name="title_activity_wsettings">Settings</string>
     <string name="lightTeme">Light theme</string>
     <string name="darkTheme">Dark theme</string>
+    <string name="sendToFriend">Send to friend</string>
+    <string name="noViewApp">There are no application!</string>
+    <string name="space">" "</string>
+    <string name="lookWetherInInternet">Weather in internet</string>
 </resources>

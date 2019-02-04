@@ -26,6 +26,8 @@ public class WeatherInfo implements Serializable {
 
     private String humidityUnit;
 
+    private String url;
+
 
     public WeatherInfo() {
     }
@@ -116,5 +118,13 @@ public class WeatherInfo implements Serializable {
 
     public void setHumidityUnit(String humidityUnit) {
         this.humidityUnit = humidityUnit;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

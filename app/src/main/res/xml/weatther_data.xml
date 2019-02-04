@@ -1,42 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Weather>
-    <City name="Новосибирск">
+    <City
+        name="Новосибирск"
+        url="https://www.gismeteo.ru/weather-novosibirsk-4690/3-days/">
         <Weather>
-            <Wind direction="ю/в" speed = "7" unit = "м/с" />
-            <Temperature value="-7" unit="C"/>
+            <Wind
+                direction="ю/в"
+                speed="7"
+                unit="м/с" />
+            <Temperature
+                unit="°C"
+                value="-7" />
             <Precipitation value="слабый снег" />
-            <Pressure value="760" unit="мм р.ст."/>
-            <Humidity value="40" unit="%"/>
+            <Pressure
+                unit="мм р.ст."
+                value="760" />
+            <Humidity
+                unit="%"
+                value="40" />
         </Weather>
     </City>
 
-    <City name="Санкт-Петербург">
+    <City
+        name="Санкт-Петербург"
+        url="https://www.gismeteo.ru/weather-sankt-peterburg-4079/3-days/">
         <Weather>
-            <Wind direction="с/з" speed = "7" unit = "м/с" />
-            <Temperature value="-27" unit="C"/>
+            <Wind
+                direction="с/з"
+                speed="7"
+                unit="м/с" />
+            <Temperature
+                unit="°C"
+                value="-27" />
             <Precipitation value="без осадков" />
-            <Pressure value="760" unit="мм р.ст."/>
-            <Humidity value="75" unit="%"/>
+            <Pressure
+                unit="мм р.ст."
+                value="760" />
+            <Humidity
+                unit="%"
+                value="75" />
         </Weather>
     </City>
 
-    <City name="Москва">
+    <City
+        name="Москва"
+        url="https://www.gismeteo.ru/weather-moscow-4368/3-days/">
         <Weather>
-            <Wind direction="c/з" speed = "7" unit = "м/с" />
-            <Temperature value="-15" unit="C"/>
+            <Wind
+                direction="c/з"
+                speed="7"
+                unit="м/с" />
+            <Temperature
+                unit="°C"
+                value="-15" />
             <Precipitation value="сильный снег" />
-            <Pressure value="760" unit="мм р.ст."/>
-            <Humidity value="75" unit="%"/>
+            <Pressure
+                unit="мм р.ст."
+                value="760" />
+            <Humidity
+                unit="%"
+                value="75" />
         </Weather>
     </City>
 
-    <City name="Казань">
+    <City
+        name="Казань"
+        url="https://www.gismeteo.ru/weather-kazan-4364/3-days/">
         <Weather>
-            <Wind direction="ю/в" speed = "7" unit = "м/с" />
-            <Temperature value="-4" unit="C"/>
+            <Wind
+                direction="ю/в"
+                speed="7"
+                unit="м/с" />
+            <Temperature
+                unit="°C"
+                value="-4" />
             <Precipitation value="без осадков" />
-            <Pressure value="760" unit="мм р.ст."/>
-            <Humidity value="75" unit="%"/>
+            <Pressure
+                unit="мм р.ст."
+                value="760" />
+            <Humidity
+                unit="%"
+                value="75" />
         </Weather>
     </City>
 </Weather>

@@ -5,4 +5,6 @@
     <dimen name="sp20">20sp</dimen>
     <dimen name="sp30">30sp</dimen>
     <dimen name="sp08">08sp</dimen>
+    <dimen name="sp04">04sp</dimen>
+    <dimen name="sp02">02sp</dimen>
 </resources>

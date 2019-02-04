@@ -107,6 +107,7 @@ public class WResourceDataProviderImpl implements WDataProvider {
                         addDataToList(weatherInfo);
                         weatherInfo = new WeatherInfo();
                         weatherInfo.setCity(parser.getAttributeValue(0));
+                        weatherInfo.setUrl(parser.getAttributeValue(1));
                         break;
                     case "Wind":
                         processAttributes(parser, weatherInfo, windAttributeProcessor);

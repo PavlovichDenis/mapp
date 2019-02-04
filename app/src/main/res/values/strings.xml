@@ -18,4 +18,8 @@
     <string name="title_activity_wsettings">Настройки</string>
     <string name="lightTeme">Светлая тема</string>
     <string name="darkTheme">Темная тема</string>
+    <string name="sendToFriend">Отправить другу</string>
+    <string name="noViewApp">Нет приложения с помощью которого можно отправить сообщение!</string>
+    <string name="space">" "</string>
+    <string name="lookWetherInInternet">Погода в интернете</string>
 </resources>
