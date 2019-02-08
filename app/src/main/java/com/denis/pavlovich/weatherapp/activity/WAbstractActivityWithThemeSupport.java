@@ -1,28 +1,29 @@
-package com.denis.pavlovich.weatherapp;
+package com.denis.pavlovich.weatherapp.activity;
 
 
 import android.os.Bundle;
 
+import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 
 public abstract class WAbstractActivityWithThemeSupport extends WAbstractActivity {
 
-    private int oldTheme = 0;
+    private int currTheme = 0;
 
     @Override
     protected void onResume() {
         super.onResume();
         int newTheme = this.getApplicationTheme();
-        if (oldTheme != newTheme) {
+        if (currTheme != newTheme) {
             recreate();
-            oldTheme = newTheme;
+            currTheme = newTheme;
         }
     }
 
     @Override
     public void setTheme(int resId) {
         super.setTheme(resId);
-        oldTheme = resId;
+        currTheme = resId;
     }
 
     protected int getApplicationTheme() {
@@ -35,13 +36,13 @@ public abstract class WAbstractActivityWithThemeSupport extends WAbstractActivit
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(WConstants.ACTUAL_THEME, oldTheme);
+        outState.putInt(WConstants.ACTUAL_THEME, currTheme);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-        oldTheme = savedInstanceState.getInt(WConstants.ACTUAL_THEME, 0);
+        currTheme = savedInstanceState.getInt(WConstants.ACTUAL_THEME, 0);
         super.onRestoreInstanceState(savedInstanceState);
     }
 }

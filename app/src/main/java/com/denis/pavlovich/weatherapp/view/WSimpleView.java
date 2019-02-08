@@ -19,23 +19,34 @@ public class WSimpleView implements Serializable {
 
     private WeatherInfo weatherInfo;
 
-    public WSimpleView(boolean showWind, boolean showHumidity, boolean showPressure, @NonNull WeatherInfo weatherInfo) {
+    private int selectedIndex;
+
+    public WSimpleView(boolean showWind, boolean showHumidity, boolean showPressure, @NonNull WeatherInfo weatherInfo, @NonNull int selectedIndex) {
         this.showWind = showWind;
         this.showHumidity = showHumidity;
         this.showPressure = showPressure;
         this.weatherInfo = weatherInfo;
+        this.selectedIndex = selectedIndex;
     }
 
     public boolean isShowWind() {
+
         return showWind;
     }
 
     public boolean isShowHumidity() {
+
         return showHumidity;
     }
 
     public boolean isShowPressure() {
+
         return showPressure;
+    }
+
+    public int getSelectedIndex() {
+
+        return selectedIndex;
     }
 
     public WeatherInfo getWeatherInfo() {
