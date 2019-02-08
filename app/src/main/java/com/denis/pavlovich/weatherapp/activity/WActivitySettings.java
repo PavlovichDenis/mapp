@@ -1,10 +1,11 @@
-package com.denis.pavlovich.weatherapp;
+package com.denis.pavlovich.weatherapp.activity;
 
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
+import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 
 public class WActivitySettings extends WAbstractActivityWithThemeSupport {

@@ -8,8 +8,9 @@
     <color name="colorPrimaryThemeDark">#848F8F</color>
     <color name="colorPrimaryThemeVeryDark">#1F3331</color>
     <color name="colorAccentThemeDark">#09800B</color>
-    <color name="colorForegroundDark">#D6DAD6</color>
+    <color name="colorLightGrey">#D6DAD6</color>
     <color name="colorBlue">#91B0CF</color>
     <color name="colorGreen">#9EC7A4</color>
+    <color name="colorGrey">#D1D1CF</color>
 
 </resources>

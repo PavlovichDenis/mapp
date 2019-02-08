@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".WActivity">
+    tools:context=".activity.WActivity">
     <item
         android:id="@+id/actionTheme"
         android:orderInCategory="100"

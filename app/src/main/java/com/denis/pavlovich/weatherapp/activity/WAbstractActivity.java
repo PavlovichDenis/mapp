@@ -1,4 +1,4 @@
-package com.denis.pavlovich.weatherapp;
+package com.denis.pavlovich.weatherapp.activity;
 
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;

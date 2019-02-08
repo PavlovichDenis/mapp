@@ -1,9 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="LightTheme" parent="Theme.AppCompat.Light" />
+    <style name="LightTheme" parent="Theme.AppCompat.Light" >
+         <item name="colorAccent">@color/colorGreen</item>
+    </style>
 
-    <style name="DarkTheme" parent="Theme.AppCompat" />
+    <style name="DarkTheme" parent="Theme.AppCompat" >
+       <item name="colorAccent">@color/colorBlue</item>
+    </style>
+
 
     <style name="aboutStyle">
         <item name="android:layout_width">match_parent</item>

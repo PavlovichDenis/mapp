@@ -10,18 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/LightTheme">
         <activity
-            android:name=".WActivitySettings"
+            android:name=".activity.WActivitySettings"
             android:label="@string/title_activity_wsettings"/>
-        <activity android:name=".WActivity">
+        <activity android:name=".activity.WActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WActivityInfo" />
+        <activity android:name=".activity.WActivityInfo" />
         <activity
-            android:name=".WActivityAbout"
+            android:name=".activity.WActivityAbout"
             android:label="@string/actionAbout"
             android:theme="@style/Theme.AppCompat.Dialog" />
     </application>

@@ -1,45 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WActivity">
+    android:orientation="vertical">
 
-
-    <LinearLayout
-        android:id="@+id/checks"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/sp10">
+        android:layout_height="match_parent">
 
-        <Switch
-            android:id="@+id/wind"
-            style="@style/mainParams"
-            android:text="@string/showWindText" />
-
-        <Switch
-            android:id="@+id/pressure"
-            style="@style/mainParams"
-            android:text="@string/showPressureText" />
-
-        <Switch
-            android:id="@+id/humidity"
-            style="@style/mainParams"
-            android:text="@string/showHumidityText" />
-
-
-        <TextView
-            style="@style/mainTitle"
-            android:drawableStart="@drawable/ic_weather_small"
-            android:text="@string/cities" />
-
-
-        <ListView
-            android:id="@+id/cities"
+        <fragment
+            android:id="@+id/fragment_cities"
+            android:name="com.denis.pavlovich.weatherapp.activity.fragment.CitiesFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </LinearLayout>
-
-
-</FrameLayout>
+    </FrameLayout>
+</LinearLayout>
