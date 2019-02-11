@@ -1,12 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="LightTheme" parent="Theme.AppCompat.Light" >
-         <item name="colorAccent">@color/colorGreen</item>
+    <style name="LightTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/colorGreen</item>
+        <item name="colorButtonNormal">@color/colorGreen</item>
+        <item name="colorAccentL">@color/colorGreen</item>
     </style>
 
-    <style name="DarkTheme" parent="Theme.AppCompat" >
-       <item name="colorAccent">@color/colorBlue</item>
+    <style name="DarkTheme" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/colorBlue</item>
+        <item name="colorButtonNormal">@color/colorBlue</item>
+        <item name="colorAccentL">@color/colorBlue</item>
     </style>
 
 
@@ -58,7 +62,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@android:color/holo_green_dark</item>
         <item name="android:textSize">@dimen/sp20</item>
     </style>
 
@@ -78,7 +81,6 @@
 
     <style name="buttonStyle">
         <item name="android:textAlignment">center</item>
-        <item name="android:background">@color/colorBlue</item>
     </style>
 
     <style name="buttonStyle.D">
@@ -88,7 +90,7 @@
     </style>
 
     <style name="buttonStyle.D.D2">
-        <item name="android:background">@color/colorGreen</item>
+
     </style>
 
     <style name="frameButtonStyle">

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+   <!-- Почему-то так не получилось обратиться к цвету из темы
+    <item  android:drawable="?attr/colorAccentL" android:state_selected="true" />
+    -->
+    <item  android:drawable="@color/colorLightGrey" android:state_selected="true" />
+</selector>

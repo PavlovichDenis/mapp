@@ -43,8 +43,13 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
             case R.id.actionTheme:
                 showSettings();
                 break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+
         }
         return true;
     }
-
 }

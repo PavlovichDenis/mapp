@@ -89,15 +89,6 @@
     <FrameLayout style="@style/frameButtonStyle">
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/sendToFriendButton"
-            style="@style/buttonStyle.D"
-            android:text="@string/sendToFriend" />
-
-    </FrameLayout>
-
-    <FrameLayout style="@style/frameButtonStyle">
-
-        <android.support.v7.widget.AppCompatButton
             android:id="@+id/lookWeatherInInternet"
             style="@style/buttonStyle.D.D2"
             android:text="@string/lookWetherInInternet" />
