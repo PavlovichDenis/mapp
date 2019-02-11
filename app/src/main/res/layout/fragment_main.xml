@@ -33,12 +33,13 @@
             android:drawableStart="@drawable/ic_weather_small"
             android:text="@string/cities" />
 
-
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/cities"
-            android:choiceMode="singleChoice"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice"
+            android:background="@drawable/item_selector"/>
+
     </LinearLayout>
 
 

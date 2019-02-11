@@ -22,5 +22,6 @@
     <string name="sendToFriend">Send to friend</string>
     <string name="noViewApp">There are no application!</string>
     <string name="space">" "</string>
-    <string name="lookWetherInInternet">Weather in internet</string>
+    <string name="lookWetherInInternet">Detailes</string>
+    <string name="action_share">Share</string>
 </resources>

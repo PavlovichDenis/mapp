@@ -6,7 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,22 +21,13 @@ import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.utils.WLogging;
-import com.denis.pavlovich.weatherapp.view.WSimpleView;
+import com.denis.pavlovich.weatherapp.data.WData;
 
-public class WetherDetailsFragment extends Fragment {
+public class WeatherDetailsFragment extends Fragment {
 
-    View.OnClickListener sendFriendClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent sendIntent = new Intent(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, getWeatherInfo().toString());
-            sendIntent.setType(WConstants.TEXT_PLAIN);
-            processIntent(sendIntent);
-        }
-    };
+    private ShareActionProvider actionProvider;
 
-
-    View.OnClickListener lookWeatherInInternetListener = new View.OnClickListener() {
+    private View.OnClickListener lookWeatherInInternetListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -42,7 +38,6 @@ public class WetherDetailsFragment extends Fragment {
         }
     };
 
-
     private void processIntent(Intent intent) {
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
@@ -51,10 +46,18 @@ public class WetherDetailsFragment extends Fragment {
         }
     }
 
-    public static WetherDetailsFragment init(WSimpleView simpleView) {
-        WetherDetailsFragment fragment = new WetherDetailsFragment();    // создание
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setHasOptionsMenu(true);
+    }
+
+    public static WeatherDetailsFragment init(WData simpleView) {
+        WeatherDetailsFragment fragment = new WeatherDetailsFragment();    // создание
         Bundle args = new Bundle();
-        args.putSerializable(WConstants.WEATHER, simpleView);
+        if (simpleView != null) {
+            args.putSerializable(WConstants.WEATHER, simpleView);
+        }
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,7 +71,7 @@ public class WetherDetailsFragment extends Fragment {
         }
     }
 
-   private String getSpace() {
+    private String getSpace() {
         return getResources().getString(R.string.space);
     }
 
@@ -77,7 +80,7 @@ public class WetherDetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_info, container, false);
         TextView textView = layout.findViewById(R.id.cityName);
-        WSimpleView simpleView = getWeatherInfo();
+        WData simpleView = getWeatherInfo();
         WeatherInfo weatherInfo = simpleView.getWeatherInfo();
         textView.setText(weatherInfo.getCity());
         // устанавлиаем идимость элементов
@@ -96,17 +99,34 @@ public class WetherDetailsFragment extends Fragment {
         textView.setText(String.format("%s%s%s", weatherInfo.getHumidity(), getSpace(), weatherInfo.getHumidityUnit()));
         textView = layout.findViewById(R.id.precipitationValue);
         textView.setText(weatherInfo.getPrecipitation());
-        Button button = layout.findViewById(R.id.sendToFriendButton);
-        button.setOnClickListener(sendFriendClickListener);
-        button = layout.findViewById(R.id.lookWeatherInInternet);
+        Button button = layout.findViewById(R.id.lookWeatherInInternet);
         button.setOnClickListener(lookWeatherInInternetListener);
         return layout;
     }
 
-    public WSimpleView getWeatherInfo() {
-        WSimpleView simpleView = (WSimpleView) getArguments().getSerializable(WConstants.WEATHER);
+    public WData getWeatherInfo() {
+        WData simpleView = (WData) getArguments().getSerializable(WConstants.WEATHER);
         return simpleView;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_info, menu);
+        MenuItem item = menu.findItem(R.id.action_share);
+        actionProvider =
+                (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        Intent sendIntent = createIntent();
+        actionProvider.setShareIntent(sendIntent);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @NonNull
+    private Intent createIntent() {
+        WData simpleView = getWeatherInfo();
+        Intent sendIntent = new Intent();
+        sendIntent.putExtra(Intent.EXTRA_TEXT, simpleView.getViewText(getResources()));
+        sendIntent.setType(WConstants.TEXT_PLAIN);
+        return sendIntent;
+    }
 
 }

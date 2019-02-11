@@ -21,5 +21,6 @@
     <string name="sendToFriend">Отправить другу</string>
     <string name="noViewApp">Нет приложения с помощью которого можно отправить сообщение!</string>
     <string name="space">" "</string>
-    <string name="lookWetherInInternet">Погода в интернете</string>
+    <string name="lookWetherInInternet">Подробнее</string>
+    <string name="action_share">Поделиться</string>
 </resources>
