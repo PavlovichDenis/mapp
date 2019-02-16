@@ -2,10 +2,12 @@ package com.denis.pavlovich.weatherapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.denis.pavlovich.weatherapp.R;
+import com.denis.pavlovich.weatherapp.utils.WConstants;
 
 public class WActivity extends WAbstractActivityWithThemeSupport {
 
@@ -14,6 +16,8 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         setTheme(getApplicationTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_w);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -51,5 +55,18 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
 
         }
         return true;
+    }
+
+    @Override
+    protected int getApplicationTheme() {
+        int theme = getIntPreferences(WConstants.APP_THEME);
+        if (theme == 0) {
+            theme = R.style.LightTheme_NoActionBar;
+        } else if (theme == R.style.LightTheme) {
+            theme = R.style.LightTheme_NoActionBar;
+        } else {
+            theme = R.style.DarkTheme_NoActionBar;
+        }
+        return theme;
     }
 }

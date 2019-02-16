@@ -12,7 +12,10 @@
         <activity
             android:name=".activity.WActivitySettings"
             android:label="@string/title_activity_wsettings"/>
-        <activity android:name=".activity.WActivity">
+        <activity
+            android:name=".activity.WActivity"
+            android:theme="@style/LightTheme.NoActionBar"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

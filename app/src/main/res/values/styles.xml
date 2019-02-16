@@ -1,18 +1,28 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="LightTheme" parent="Theme.AppCompat.Light">
+    <style name="LightTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorAccent">@color/colorGreen</item>
         <item name="colorButtonNormal">@color/colorGreen</item>
         <item name="colorAccentL">@color/colorGreen</item>
+
     </style>
 
-    <style name="DarkTheme" parent="Theme.AppCompat">
+    <style name="DarkTheme" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="colorAccent">@color/colorBlue</item>
         <item name="colorButtonNormal">@color/colorBlue</item>
         <item name="colorAccentL">@color/colorBlue</item>
     </style>
 
+    <style name="LightTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="DarkTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
     <style name="aboutStyle">
         <item name="android:layout_width">match_parent</item>
@@ -36,6 +46,7 @@
         <item name="android:checked">true</item>
         <item name="android:paddingTop">@dimen/sp10</item>
         <item name="android:paddingLeft">@dimen/sp10</item>
+        <item name="android:textSize">@dimen/sp16</item>
     </style>
 
     <style name="settingsRadioButton">
@@ -99,6 +110,28 @@
         <item name="android:paddingTop">@dimen/sp02</item>
         <item name="android:paddingLeft">@dimen/sp10</item>
         <item name="android:paddingRight">@dimen/sp10</item>
+    </style>
+
+    <style name="cardRecyclerStyle">
+        <item name="android:padding">@dimen/sp10</item>
+        <item name="android:textSize">@dimen/sp20</item>
+    </style>
+
+    <style name="AppBarLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/sp150</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="CollapsingToolBarLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="ToolbarStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
     </style>
 
 </resources>

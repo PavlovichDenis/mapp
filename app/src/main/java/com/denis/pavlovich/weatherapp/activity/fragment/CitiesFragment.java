@@ -25,11 +25,14 @@ import com.denis.pavlovich.weatherapp.data.WData;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+
 public class CitiesFragment extends Fragment {
 
     private boolean existsDetails;
     private List<WeatherInfo> weatherInfos;
     private WData simpleView;
+    private RecyclerView recyclerView;
 
     interface OnItemClickListener {
         void itemClicked(int position);
@@ -67,7 +70,9 @@ public class CitiesFragment extends Fragment {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             simpleView = constructSimpleView(simpleView.getSelectedIndex());
-            showWeather(simpleView);
+            if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
+                showWeather(simpleView);
+            }
         }
     };
 
@@ -86,10 +91,6 @@ public class CitiesFragment extends Fragment {
 
     }
 
-    private RecyclerView getListView() {
-        return getActivity().findViewById(R.id.cities);
-    }
-
     private void setSwitchListener(View view, int id) {
         Switch sw = view.findViewById(id);
         sw.setOnCheckedChangeListener(switchOnCheckedChangeListener);
@@ -102,11 +103,11 @@ public class CitiesFragment extends Fragment {
         setSwitchListener(view, R.id.humidity);
         setSwitchListener(view, R.id.pressure);
 
-        RecyclerView listView = view.findViewById(R.id.cities);
+        recyclerView = view.findViewById(R.id.cities);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        listView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
         RecyclerListAdapter adapter = new RecyclerListAdapter(getList(), onClickListener);
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -132,10 +133,10 @@ public class CitiesFragment extends Fragment {
 
     private void showWeather(WData sv) {
         if (existsDetails) {
-            RecyclerView listView = getListView();
             int selectedIndex = sv.getSelectedIndex();
-            //listView.setItemChecked(selectedIndex, true);
-            listView.smoothScrollToPosition(selectedIndex);
+            if (recyclerView != null) {
+                recyclerView.smoothScrollToPosition(selectedIndex);
+            }
             WeatherDetailsFragment wd = WeatherDetailsFragment.init(sv);
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_params, wd);

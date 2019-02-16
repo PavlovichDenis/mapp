@@ -30,11 +30,12 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     @NonNull
     @Override
     public RecyclerListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        TextView textView = (TextView) LayoutInflater.from(viewGroup.getContext()).inflate(android.R.layout.simple_list_item_activated_1, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_recycler_view, viewGroup, false);
+        TextView textView = view.findViewById(R.id.city_name);
         textView.setBackground(viewGroup.getResources().getDrawable(
                 R.drawable.item_selector,
                 viewGroup.getContext().getTheme()));
-        RecyclerListViewHolder viewHolder = new RecyclerListViewHolder(textView, listener);
+        RecyclerListViewHolder viewHolder = new RecyclerListViewHolder(view, listener);
         return viewHolder;
     }
 
@@ -57,11 +58,13 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     static class RecyclerListViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
+        View view;
 
-        RecyclerListViewHolder(@NonNull final TextView itemView, final CitiesFragment.OnItemClickListener listener) {
+        RecyclerListViewHolder(@NonNull final View itemView, final CitiesFragment.OnItemClickListener listener) {
             super(itemView);
-            this.textView = itemView;
-            this.textView.setOnClickListener(new View.OnClickListener() {
+            this.textView = itemView.findViewById(R.id.city_name);
+            view = itemView;
+            textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     selectedPosition = getLayoutPosition();
