@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/sp08"
+    android:elevation="@dimen/sp04"
+    app:cardCornerRadius="@dimen/sp04"
+    app:cardElevation="@dimen/sp04">
+
+    <TextView
+        android:id="@+id/city_name"
+        style="@style/cardRecyclerStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</android.support.design.card.MaterialCardView>
+

@@ -2,6 +2,8 @@ package com.denis.pavlovich.weatherapp.activity;
 
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
@@ -49,14 +51,25 @@ public class WActivitySettings extends WAbstractActivityWithThemeSupport {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wsettings);
         setCheckedButton(theme);
-
         setRadioListener(R.id.lightTheme);
         setRadioListener(R.id.darkTheme);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
 
     private void setRadioListener(int button) {
         RadioButton rb = findViewById(button);
         rb.setOnClickListener(radioButtonClickListener);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -7,4 +7,6 @@
     <dimen name="sp08">08sp</dimen>
     <dimen name="sp04">04sp</dimen>
     <dimen name="sp02">02sp</dimen>
+    <dimen name="sp180">180sp</dimen>
+    <dimen name="sp150">150sp</dimen>
 </resources>
