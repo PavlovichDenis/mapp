@@ -24,4 +24,7 @@
     <string name="space">" "</string>
     <string name="lookWetherInInternet">Detailes</string>
     <string name="action_share">Share</string>
+
+    <string name="navigation_drawer_open">Open navigation</string>
+    <string name="navigation_drawer_close">Close navigation</string>
 </resources>

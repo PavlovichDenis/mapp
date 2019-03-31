@@ -9,4 +9,9 @@
     <dimen name="sp02">02sp</dimen>
     <dimen name="sp180">180sp</dimen>
     <dimen name="sp150">150sp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
