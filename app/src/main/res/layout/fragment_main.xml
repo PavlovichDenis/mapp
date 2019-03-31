@@ -11,8 +11,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingStart="@dimen/sp10"
-        android:paddingRight="@dimen/sp10"
-        android:paddingLeft="@dimen/sp10">
+        android:paddingLeft="@dimen/sp10"
+        android:paddingRight="@dimen/sp10">
 
         <Switch
             android:id="@+id/wind"
@@ -31,6 +31,7 @@
 
 
         <TextView
+            android:id="@+id/wetherText"
             style="@style/mainTitle"
             android:drawableStart="@drawable/ic_weather_small"
             android:text="@string/cities" />
