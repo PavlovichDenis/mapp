@@ -23,7 +23,7 @@ public class WData implements Serializable {
 
     private int selectedIndex;
 
-    public WData(boolean showWind, boolean showHumidity, boolean showPressure, @NonNull WeatherInfo weatherInfo, @NonNull int selectedIndex) {
+    public WData(boolean showWind, boolean showHumidity, boolean showPressure, @NonNull WeatherInfo weatherInfo, int selectedIndex) {
         this.showWind = showWind;
         this.showHumidity = showHumidity;
         this.showPressure = showPressure;

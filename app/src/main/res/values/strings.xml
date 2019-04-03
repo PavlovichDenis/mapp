@@ -23,6 +23,9 @@
     <string name="space">" "</string>
     <string name="lookWetherInInternet">Подробнее</string>
     <string name="action_share">Поделиться</string>
+    <string name="currTemperatureTemplate">Температура: %s%s</string>
+    <string name="currHumidityTemplate">Влажность: %s%s</string>
+    <string name="emptyWData">Нет данных о погоде</string>
 
     <string name="navigation_drawer_open">Открыть навигацию</string>
     <string name="navigation_drawer_close">Закрыть навигацию</string>

@@ -24,6 +24,9 @@
     <string name="space">" "</string>
     <string name="lookWetherInInternet">Detailes</string>
     <string name="action_share">Share</string>
+    <string name="currTemperatureTemplate">Temperature: %s%s</string>
+    <string name="currHumidityTemplate">Humidity: %s%s</string>
+    <string name="emptyWData">Empty weather data</string>
 
     <string name="navigation_drawer_open">Open navigation</string>
     <string name="navigation_drawer_close">Close navigation</string>

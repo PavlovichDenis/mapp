@@ -17,9 +17,10 @@ public class WActivityInfo extends WAbstractActivityWithThemeSupport {
         setTheme(getApplicationTheme());
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
+        if (actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
             finish();
             return;

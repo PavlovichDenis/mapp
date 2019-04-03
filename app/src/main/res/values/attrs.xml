@@ -3,4 +3,9 @@
     <declare-styleable name="LightTheme">
         <attr name="colorAccentL" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="UnitTextView">
+        <attr name="template" format="string" />
+        <attr name="unit" format="string" />
+    </declare-styleable>
 </resources>

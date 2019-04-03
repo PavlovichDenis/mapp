@@ -1,4 +1,4 @@
-package com.denis.pavlovich.weatherapp.dao;
+package com.denis.pavlovich.weatherapp.data.provider;
 
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
@@ -19,16 +19,16 @@ import java.util.List;
  *
  */
 
-interface AttributeProcessor {
+interface IAttributeProcessor {
     void processAttribute(XmlPullParser parser, WeatherInfo weatherInfo, int index);
 }
 
-public class WResourceDataProviderImpl implements WDataProvider {
+public class WResourceDataProviderImpl implements IWDataProvider {
 
     private List<WeatherInfo> weatherInfos;
     private Resources resources;
 
-    private AttributeProcessor windAttributeProcessor = new AttributeProcessor() {
+    private IAttributeProcessor windAttributeProcessor = new IAttributeProcessor() {
         @Override
         public void processAttribute(XmlPullParser parser, WeatherInfo weatherInfo, int index) {
             String attrName = parser.getAttributeName(index);
@@ -46,7 +46,7 @@ public class WResourceDataProviderImpl implements WDataProvider {
         }
     };
 
-    private AttributeProcessor tempAttributeProcessor = new AttributeProcessor() {
+    private IAttributeProcessor tempAttributeProcessor = new IAttributeProcessor() {
         @Override
         public void processAttribute(XmlPullParser parser, WeatherInfo weatherInfo, int index) {
             String attrName = parser.getAttributeName(index);
@@ -58,7 +58,7 @@ public class WResourceDataProviderImpl implements WDataProvider {
         }
     };
 
-    private AttributeProcessor pressAttributeProcessor = new AttributeProcessor() {
+    private IAttributeProcessor pressAttributeProcessor = new IAttributeProcessor() {
         @Override
         public void processAttribute(XmlPullParser parser, WeatherInfo weatherInfo, int index) {
             String attrName = parser.getAttributeName(index);
@@ -70,7 +70,7 @@ public class WResourceDataProviderImpl implements WDataProvider {
         }
     };
 
-    private AttributeProcessor humAttributeProcessor = new AttributeProcessor() {
+    private IAttributeProcessor humAttributeProcessor = new IAttributeProcessor() {
         @Override
         public void processAttribute(XmlPullParser parser, WeatherInfo weatherInfo, int index) {
             String attrName = parser.getAttributeName(index);
@@ -91,7 +91,7 @@ public class WResourceDataProviderImpl implements WDataProvider {
     }
 
 
-    private void processAttributes(XmlPullParser parser, @NonNull WeatherInfo weatherInfo, AttributeProcessor attributeProcessor) {
+    private void processAttributes(XmlPullParser parser, @NonNull WeatherInfo weatherInfo, IAttributeProcessor attributeProcessor) {
         for (int i = 0; i < parser.getAttributeCount(); i++) {
             attributeProcessor.processAttribute(parser, weatherInfo, i);
         }

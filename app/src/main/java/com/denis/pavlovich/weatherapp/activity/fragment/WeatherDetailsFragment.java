@@ -1,5 +1,6 @@
 package com.denis.pavlovich.weatherapp.activity.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,24 +26,27 @@ import com.denis.pavlovich.weatherapp.data.WData;
 
 public class WeatherDetailsFragment extends Fragment {
 
-    private ShareActionProvider actionProvider;
-
     private View.OnClickListener lookWeatherInInternetListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            Uri uri = Uri.parse(getWeatherInfo().getWeatherInfo().getUrl());
-            intent.setData(uri);
-            processIntent(intent);
-
+            WData wData = getWeatherInfo();
+            if (wData != null) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse(wData.getWeatherInfo().getUrl());
+                intent.setData(uri);
+                processIntent(intent);
+            }
         }
     };
 
     private void processIntent(Intent intent) {
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            WLogging.makeToast(getActivity().getBaseContext(), getResources().getString(R.string.noViewApp));
+        Activity activity = getActivity();
+        if (activity != null) {
+            if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                WLogging.makeToast(getActivity().getBaseContext(), getResources().getString(R.string.noViewApp));
+            }
         }
     }
 
@@ -81,40 +85,47 @@ public class WeatherDetailsFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_info, container, false);
         TextView textView = layout.findViewById(R.id.cityName);
         WData simpleView = getWeatherInfo();
-        WeatherInfo weatherInfo = simpleView.getWeatherInfo();
-        textView.setText(weatherInfo.getCity());
-        // устанавлиаем идимость элементов
-        setVisible(layout.findViewById(R.id.windView), simpleView.isShowWind());
-        setVisible(layout.findViewById(R.id.pressureView), simpleView.isShowPressure());
-        setVisible(layout.findViewById(R.id.humidityView), simpleView.isShowHumidity());
+        if (simpleView != null) {
+            WeatherInfo weatherInfo = simpleView.getWeatherInfo();
+            textView.setText(weatherInfo.getCity());
+            // устанавлиаем идимость элементов
+            setVisible(layout.findViewById(R.id.windView), simpleView.isShowWind());
+            setVisible(layout.findViewById(R.id.pressureView), simpleView.isShowPressure());
+            setVisible(layout.findViewById(R.id.humidityView), simpleView.isShowHumidity());
 
-        //Устанавлиаем сведения о погоде
-        textView = layout.findViewById(R.id.temperatureValue);
-        textView.setText(String.format("%s%s%s", weatherInfo.getTemperature(), getSpace(), weatherInfo.getTemperatureUnit()));
-        textView = layout.findViewById(R.id.windValue);
-        textView.setText(String.format("%s%s%s%s%s", weatherInfo.getWindDirection(), getSpace(), weatherInfo.getWindSpeed(), getSpace(), weatherInfo.getWindSpeedUnit()));
-        textView = layout.findViewById(R.id.pressureValue);
-        textView.setText(String.format("%s%s%s", weatherInfo.getPressure(), getSpace(), weatherInfo.getPressureUnit()));
-        textView = layout.findViewById(R.id.humidityValue);
-        textView.setText(String.format("%s%s%s", weatherInfo.getHumidity(), getSpace(), weatherInfo.getHumidityUnit()));
-        textView = layout.findViewById(R.id.precipitationValue);
-        textView.setText(weatherInfo.getPrecipitation());
+            //Устанавлиаем сведения о погоде
+            textView = layout.findViewById(R.id.temperatureValue);
+            textView.setText(String.format("%s%s%s", weatherInfo.getTemperature(), getSpace(), weatherInfo.getTemperatureUnit()));
+            textView = layout.findViewById(R.id.windValue);
+            textView.setText(String.format("%s%s%s%s%s", weatherInfo.getWindDirection(), getSpace(), weatherInfo.getWindSpeed(), getSpace(), weatherInfo.getWindSpeedUnit()));
+            textView = layout.findViewById(R.id.pressureValue);
+            textView.setText(String.format("%s%s%s", weatherInfo.getPressure(), getSpace(), weatherInfo.getPressureUnit()));
+            textView = layout.findViewById(R.id.humidityValue);
+            textView.setText(String.format("%s%s%s", weatherInfo.getHumidity(), getSpace(), weatherInfo.getHumidityUnit()));
+            textView = layout.findViewById(R.id.precipitationValue);
+            textView.setText(weatherInfo.getPrecipitation());
+        } else {
+            // что-то пошло совсем не так
+            WLogging.complexToast(getContext(), getString(R.string.emptyWData));
+        }
         Button button = layout.findViewById(R.id.lookWeatherInInternet);
         button.setOnClickListener(lookWeatherInInternetListener);
         return layout;
     }
 
+    @Nullable
     public WData getWeatherInfo() {
-        WData simpleView = (WData) getArguments().getSerializable(WConstants.WEATHER);
-        return simpleView;
+        if (getArguments() != null) {
+            return (WData) getArguments().getSerializable(WConstants.WEATHER);
+        }
+        return null;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_info, menu);
         MenuItem item = menu.findItem(R.id.action_share);
-        actionProvider =
-                (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        ShareActionProvider actionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         Intent sendIntent = createIntent();
         actionProvider.setShareIntent(sendIntent);
         super.onCreateOptionsMenu(menu, inflater);
@@ -124,7 +135,9 @@ public class WeatherDetailsFragment extends Fragment {
     private Intent createIntent() {
         WData simpleView = getWeatherInfo();
         Intent sendIntent = new Intent();
-        sendIntent.putExtra(Intent.EXTRA_TEXT, simpleView.getViewText(getResources()));
+        if (simpleView != null) {
+            sendIntent.putExtra(Intent.EXTRA_TEXT, simpleView.getViewText(getResources()));
+        }
         sendIntent.setType(WConstants.TEXT_PLAIN);
         return sendIntent;
     }
