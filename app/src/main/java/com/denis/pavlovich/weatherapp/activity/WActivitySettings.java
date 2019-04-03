@@ -54,9 +54,10 @@ public class WActivitySettings extends WAbstractActivityWithThemeSupport {
         setRadioListener(R.id.lightTheme);
         setRadioListener(R.id.darkTheme);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void setRadioListener(int button) {

@@ -1,10 +1,12 @@
 package com.denis.pavlovich.weatherapp.activity.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +18,8 @@ import android.widget.Switch;
 
 import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.activity.WActivityInfo;
-import com.denis.pavlovich.weatherapp.dao.WDataProvider;
-import com.denis.pavlovich.weatherapp.dao.WResourceDataProviderImpl;
+import com.denis.pavlovich.weatherapp.data.provider.IWDataProvider;
+import com.denis.pavlovich.weatherapp.data.provider.WResourceDataProviderImpl;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.data.WData;
@@ -39,11 +41,11 @@ public class CitiesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        WDataProvider dataProvider = new WResourceDataProviderImpl(getResources());
+        IWDataProvider dataProvider = new WResourceDataProviderImpl(getResources());
         weatherInfos = dataProvider.getWeatherData();
         return view;
     }
@@ -76,16 +78,26 @@ public class CitiesFragment extends Fragment {
         }
     };
 
-    private Switch getSwitch(int id) {
-        return getActivity().findViewById(id);
+    @Nullable
+    private View getView(int id) {
+        Activity activity = getActivity();
+        if (activity != null) {
+            return activity.findViewById(id);
+        }
+        return null;
+    }
+
+    private boolean getSwitchChecked(int id) {
+        View view = getView(id);
+        return view != null && ((Switch) view).isChecked();
     }
 
     private WData constructSimpleView(int position) {
         WeatherInfo wi = weatherInfos.get(position);
         return new WData(
-                getSwitch(R.id.wind).isChecked(),
-                getSwitch(R.id.humidity).isChecked(),
-                getSwitch(R.id.pressure).isChecked(),
+                getSwitchChecked(R.id.wind),
+                getSwitchChecked(R.id.humidity),
+                getSwitchChecked(R.id.pressure),
                 wi,
                 position);
 
@@ -113,7 +125,7 @@ public class CitiesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        existsDetails = getActivity().findViewById(R.id.fragment_params) != null;
+        existsDetails = getView(R.id.fragment_params) != null;
         if (savedInstanceState != null) {
             simpleView = (WData) savedInstanceState.getSerializable(WConstants.WEATHER);
         } else {
@@ -126,7 +138,7 @@ public class CitiesFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(WConstants.WEATHER, simpleView);
     }
@@ -138,15 +150,21 @@ public class CitiesFragment extends Fragment {
                 recyclerView.smoothScrollToPosition(selectedIndex);
             }
             WeatherDetailsFragment wd = WeatherDetailsFragment.init(sv);
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_params, wd);
-            ft.commit();
+            FragmentManager fm = getFragmentManager();
+            if (fm != null) {
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_params, wd);
+                ft.commit();
+            }
         } else {
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), WActivityInfo.class);
-            // и передадим туда параметры
-            intent.putExtra(WConstants.WEATHER, sv);
-            startActivity(intent);
+            Activity activity = getActivity();
+            if (activity != null) {
+                Intent intent = new Intent();
+                intent.setClass(activity, WActivityInfo.class);
+                // и передадим туда параметры
+                intent.putExtra(WConstants.WEATHER, sv);
+                startActivity(intent);
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.denis.pavlovich.weatherapp.activity.fragment;
 
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,11 +33,11 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     public RecyclerListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_recycler_view, viewGroup, false);
         TextView textView = view.findViewById(R.id.city_name);
-        textView.setBackground(viewGroup.getResources().getDrawable(
+        /*textView.setBackground(viewGroup.getResources().getDrawable(
                 R.drawable.item_selector,
-                viewGroup.getContext().getTheme()));
-        RecyclerListViewHolder viewHolder = new RecyclerListViewHolder(view, listener);
-        return viewHolder;
+                viewGroup.getContext().getTheme()));*/
+        textView.setBackground(ContextCompat.getDrawable(viewGroup.getContext(), R.drawable.item_selector));
+        return new RecyclerListViewHolder(view, listener);
     }
 
     @Override

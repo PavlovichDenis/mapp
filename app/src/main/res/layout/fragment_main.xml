@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
 
     <LinearLayout
@@ -13,6 +15,31 @@
         android:paddingStart="@dimen/sp10"
         android:paddingLeft="@dimen/sp10"
         android:paddingRight="@dimen/sp10">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.denis.pavlovich.weatherapp.view.UnitTextView
+                android:id="@+id/currTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/infoWeatherParameter"
+                app:template="@string/currTemperatureTemplate"
+                app:unit="°C"
+                android:text=""/>
+
+            <com.denis.pavlovich.weatherapp.view.UnitTextView
+                android:id="@+id/currHumidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/infoWeatherParameter"
+                app:template="@string/currHumidityTemplate"
+                app:unit="%"
+                android:text=""/>
+
+        </LinearLayout>
 
         <Switch
             android:id="@+id/wind"
