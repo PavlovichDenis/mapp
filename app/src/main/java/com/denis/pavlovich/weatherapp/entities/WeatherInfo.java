@@ -1,5 +1,9 @@
 package com.denis.pavlovich.weatherapp.entities;
 
+import android.content.res.Resources;
+
+import com.denis.pavlovich.weatherapp.R;
+
 import java.io.Serializable;
 
 public class WeatherInfo implements Serializable {
@@ -126,5 +130,45 @@ public class WeatherInfo implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    private String getLineSeparator() {
+        return System.getProperty("line.separator");
+    }
+
+    private String getStringWithspace(Resources res, int id) {
+        return res.getString(id) + " ";
+    }
+
+    public String getViewText(Resources res) {
+        StringBuilder str = new StringBuilder();
+        str.append(getCity())
+                .append(getLineSeparator());
+        str.append(getStringWithspace(res, R.string.temperature))
+                .append(getTemperature())
+                .append(" ")
+                .append(getTemperatureUnit())
+                .append(getLineSeparator());
+        str.append(getStringWithspace(res, R.string.precipitation))
+                .append(getPrecipitation())
+                .append(getLineSeparator());
+        str.append(getStringWithspace(res, R.string.wind))
+                .append(getWindDirection())
+                .append(" ")
+                .append(getWindSpeed())
+                .append(" ")
+                .append(getWindSpeedUnit())
+                .append(getLineSeparator());
+        str.append(getStringWithspace(res, R.string.humidity))
+                .append(getHumidity())
+                .append(" ")
+                .append(getHumidityUnit())
+                .append(getLineSeparator());
+        str.append(getStringWithspace(res, R.string.pressure))
+                .append(getPressure())
+                .append(" ")
+                .append(getPressureUnit())
+                .append(getLineSeparator());
+        return str.toString();
     }
 }

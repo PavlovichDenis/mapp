@@ -41,6 +41,4 @@ public class WActivityInfo extends WAbstractActivityWithThemeSupport {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

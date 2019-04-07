@@ -4,9 +4,9 @@
     <dimen name="sp10">10sp</dimen>
     <dimen name="sp20">20sp</dimen>
     <dimen name="sp30">30sp</dimen>
-    <dimen name="sp08">08sp</dimen>
-    <dimen name="sp04">04sp</dimen>
-    <dimen name="sp02">02sp</dimen>
+    <dimen name="sp08">8sp</dimen>
+    <dimen name="sp04">4sp</dimen>
+    <dimen name="sp02">2sp</dimen>
     <dimen name="sp180">180sp</dimen>
     <dimen name="sp150">150sp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>

@@ -75,20 +75,23 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         setSupportActionBar(toolbar);
         View view = findViewById(R.id.wetherText);
         registerForContextMenu(view);
+        configureDrawerLayout(toolbar);
+        configureSensors();
+    }
 
-        tempView = findViewById(R.id.currTemperature);
-        humView = findViewById(R.id.currHumidity);
-
+    private void configureDrawerLayout(Toolbar toolbar) {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
 
-        //Получаем сенсоры
+    private void configureSensors() {
+        tempView = findViewById(R.id.currTemperature);
+        humView = findViewById(R.id.currHumidity);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorHumidity = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
         sensorTemperature = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);

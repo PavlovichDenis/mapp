@@ -11,14 +11,13 @@
         android:theme="@style/LightTheme">
         <activity
             android:name=".activity.WActivitySettings"
-            android:label="@string/title_activity_wsettings"/>
+            android:label="@string/title_activity_wsettings" />
         <activity
             android:name=".activity.WActivity"
-            android:theme="@style/LightTheme.NoActionBar"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/LightTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,6 +26,15 @@
             android:name=".activity.WActivityAbout"
             android:label="@string/actionAbout"
             android:theme="@style/Theme.AppCompat.Dialog" />
+
+        <service
+            android:name=".services.CityService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".services.WeatherDetailsService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

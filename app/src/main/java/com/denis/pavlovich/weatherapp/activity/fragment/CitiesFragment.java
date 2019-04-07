@@ -1,7 +1,10 @@
 package com.denis.pavlovich.weatherapp.activity.fragment;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,17 +17,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.activity.WActivityInfo;
-import com.denis.pavlovich.weatherapp.data.provider.IWDataProvider;
-import com.denis.pavlovich.weatherapp.data.provider.WResourceDataProviderImpl;
-import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
+import com.denis.pavlovich.weatherapp.services.CityService;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.data.WData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
@@ -32,9 +33,30 @@ import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 public class CitiesFragment extends Fragment {
 
     private boolean existsDetails;
-    private List<WeatherInfo> weatherInfos;
+
     private WData simpleView;
+
     private RecyclerView recyclerView;
+
+    private ProgressBar progressBar;
+
+    final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            List<String> list = null;
+            try {
+                Bundle bundle = intent.getExtras();
+                if (bundle != null) {
+                    list = (List<String>) bundle.getSerializable(WConstants.CITIES_LIST);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            configureRecycleView(getView(), list);
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+    };
 
     interface OnItemClickListener {
         void itemClicked(int position);
@@ -44,20 +66,8 @@ public class CitiesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        IWDataProvider dataProvider = new WResourceDataProviderImpl(getResources());
-        weatherInfos = dataProvider.getWeatherData();
-        return view;
+        return inflater.inflate(R.layout.fragment_main, container, false);
     }
-
-    private List<String> getList() {
-        ArrayList<String> list = new ArrayList<>();
-        for (WeatherInfo wi : weatherInfos) {
-            list.add(wi.getCity());
-        }
-        return list;
-    }
-
 
     private OnItemClickListener onClickListener = new OnItemClickListener() {
 
@@ -93,14 +103,11 @@ public class CitiesFragment extends Fragment {
     }
 
     private WData constructSimpleView(int position) {
-        WeatherInfo wi = weatherInfos.get(position);
         return new WData(
                 getSwitchChecked(R.id.wind),
                 getSwitchChecked(R.id.humidity),
                 getSwitchChecked(R.id.pressure),
-                wi,
                 position);
-
     }
 
     private void setSwitchListener(View view, int id) {
@@ -114,11 +121,28 @@ public class CitiesFragment extends Fragment {
         setSwitchListener(view, R.id.wind);
         setSwitchListener(view, R.id.humidity);
         setSwitchListener(view, R.id.pressure);
+        progressBar = view.findViewById(R.id.cityProgressBar);
+        //configureRecycleView(view);
+        getCitiesList();
+    }
 
+    private void getCitiesList() {
+        Activity activity = getActivity();
+        if (activity != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(activity, CityService.class);
+            activity.startService(intent);
+        }
+    }
+
+    private void configureRecycleView(@Nullable View view, List<String> citiesList) {
+        if (view == null || citiesList == null) {
+            return;
+        }
         recyclerView = view.findViewById(R.id.cities);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerListAdapter adapter = new RecyclerListAdapter(getList(), onClickListener);
+        RecyclerListAdapter adapter = new RecyclerListAdapter(citiesList, onClickListener);
         recyclerView.setAdapter(adapter);
     }
 
@@ -134,7 +158,32 @@ public class CitiesFragment extends Fragment {
         if (existsDetails) {
             showWeather(simpleView);
         }
+    }
 
+    private void registerCitiesReciver() {
+        // регистрируем BroadcastReceiver
+        IntentFilter intentFilter = new IntentFilter(
+                WConstants.SERVICE_CITY_RESPONSE);
+        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
+        Activity activity = getActivity();
+        if (activity != null) {
+            activity.registerReceiver(broadcastReceiver, intentFilter);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Activity activity = getActivity();
+        if (activity != null) {
+            getActivity().unregisterReceiver(broadcastReceiver);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerCitiesReciver();
     }
 
     @Override
@@ -167,6 +216,4 @@ public class CitiesFragment extends Fragment {
             }
         }
     }
-
-
 }
