@@ -15,38 +15,37 @@ public abstract class WAbstractActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        WLogging.complexToast(getApplicationContext(), getMessage("onStart"));
+        //WLogging.complexToast(getApplicationContext(), getMessage("onStart"));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        WLogging.complexToast(getApplicationContext(), getMessage("onResume"));
-
+        //WLogging.complexToast(getApplicationContext(), getMessage("onResume"));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        WLogging.complexToast(getApplicationContext(), getMessage("onPause"));
+        //WLogging.complexToast(getApplicationContext(), getMessage("onPause"));
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        WLogging.complexToast(getApplicationContext(), getMessage("onStop"));
+        //WLogging.complexToast(getApplicationContext(), getMessage("onStop"));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        WLogging.complexToast(getApplicationContext(), getMessage("onDestroy"));
+        //WLogging.complexToast(getApplicationContext(), getMessage("onDestroy"));
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        WLogging.complexToast(getApplicationContext(), getMessage("onRestart"));
+        //WLogging.complexToast(getApplicationContext(), getMessage("onRestart"));
     }
 
     protected void savePreferences(String key, int value) {
@@ -57,24 +56,9 @@ public abstract class WAbstractActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    protected void savePreferences(String key, String value) {
-        SharedPreferences sharedPreferences = getSharedPreferences(
-                WConstants.APP_PREFERENCES, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, value);
-        editor.apply();
-    }
-
     protected int getIntPreferences(String key) {
         SharedPreferences sharedPreferences = getSharedPreferences(
                 WConstants.APP_PREFERENCES, MODE_PRIVATE);
         return sharedPreferences.getInt(key, 0);
     }
-
-    protected String getStringPreferences(String key) {
-        SharedPreferences sharedPreferences = getSharedPreferences(
-                WConstants.APP_PREFERENCES, MODE_PRIVATE);
-        return sharedPreferences.getString(key, null);
-    }
-
 }

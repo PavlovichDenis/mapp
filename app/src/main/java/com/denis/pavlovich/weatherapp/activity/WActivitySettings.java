@@ -53,6 +53,10 @@ public class WActivitySettings extends WAbstractActivityWithThemeSupport {
         setCheckedButton(theme);
         setRadioListener(R.id.lightTheme);
         setRadioListener(R.id.darkTheme);
+        configureActionBar();
+    }
+
+    private void configureActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
@@ -72,6 +76,4 @@ public class WActivitySettings extends WAbstractActivityWithThemeSupport {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

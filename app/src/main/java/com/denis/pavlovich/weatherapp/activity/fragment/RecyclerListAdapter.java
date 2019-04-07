@@ -16,6 +16,7 @@ import java.util.List;
 public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.RecyclerListViewHolder> {
 
     private final List<String> list;
+
     private final CitiesFragment.OnItemClickListener listener;
     //поддерживаю только single select режим
     private static int selectedPosition = 0;
@@ -59,6 +60,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     static class RecyclerListViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
+
         View view;
 
         RecyclerListViewHolder(@NonNull final View itemView, final CitiesFragment.OnItemClickListener listener) {
@@ -80,7 +82,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                     selectedItem = new WeakReference<>(itemView);
                 }
             });
-
         }
     }
 }

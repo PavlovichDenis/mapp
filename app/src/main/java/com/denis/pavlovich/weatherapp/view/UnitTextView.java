@@ -43,29 +43,8 @@ public class UnitTextView extends android.support.v7.widget.AppCompatTextView {
         setText(String.format(template, value, unit), TextView.BufferType.SPANNABLE);
     }
 
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-        initText();
-    }
-
-    public String getValue() {
-        return value;
-    }
-
     public void setValue(String value) {
         this.value = value;
         initText();
-    }
-
-    public String getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
     }
 }
