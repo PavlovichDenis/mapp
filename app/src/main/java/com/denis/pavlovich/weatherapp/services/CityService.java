@@ -28,7 +28,7 @@ public class CityService extends IntentService {
 
     private void delay() {
         try {
-            Thread.sleep(2500);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -13,6 +13,8 @@ import com.denis.pavlovich.weatherapp.R;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+
 public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.RecyclerListViewHolder> {
 
     private final List<String> list;
@@ -47,6 +49,10 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         if (i == selectedPosition) {
             recyclerListViewHolder.textView.setSelected(true);
             selectedItem = new WeakReference<>(recyclerListViewHolder.textView);
+            //  Чтобы при запуске приложения в горизонтальном режиме, сразу показать информацию о погоде
+            if (recyclerListViewHolder.textView.getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
+                recyclerListViewHolder.textView.callOnClick();
+            }
         } else {
             recyclerListViewHolder.textView.setSelected(false);
         }
@@ -71,7 +77,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                 @Override
                 public void onClick(View v) {
                     selectedPosition = getLayoutPosition();
-                    listener.itemClicked(selectedPosition);
+                    listener.itemClicked(selectedPosition, String.valueOf(textView.getText()));
                     if (selectedItem != null) {
                         View view = selectedItem.get();
                         if (view != null) {

@@ -26,6 +26,8 @@
     <string name="currTemperatureTemplate">Температура: %s%s</string>
     <string name="currHumidityTemplate">Влажность: %s%s</string>
     <string name="emptyWData">Нет данных о погоде</string>
+    <string name="pressureUnit">мм рт. ст.</string>
+    <string name="speedUnit">м/с</string>
 
     <string name="navigation_drawer_open">Открыть навигацию</string>
     <string name="navigation_drawer_close">Закрыть навигацию</string>

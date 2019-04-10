@@ -18,6 +18,8 @@ public final class WConstants {
 
     public static String CITY_SELECTED = "citySelected";
 
+    public static String CITY_SELECTED_NAME = "citySelectedName";
+
     public static String CITY_WEATHER_DATA = "cityWeatherData";
 
     public static String SERVICE_CITY_RESPONSE = "com.denis.pavlovich.weatherapp.activity.CityResponse";

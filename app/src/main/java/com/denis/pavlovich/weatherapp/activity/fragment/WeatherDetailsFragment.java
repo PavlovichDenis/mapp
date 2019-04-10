@@ -58,7 +58,7 @@ public class WeatherDetailsFragment extends Fragment {
             try {
                 Bundle bundle = intent.getExtras();
                 if (bundle != null) {
-                    weatherInfo = (WeatherInfo) bundle.getSerializable(WConstants.CITY_WEATHER_DATA);
+                    weatherInfo = bundle.getParcelable(WConstants.CITY_WEATHER_DATA);
                     showWeatherData(getView());
                     Intent sendIntent = createIntent();
                     actionProvider.setShareIntent(sendIntent);
@@ -91,7 +91,7 @@ public class WeatherDetailsFragment extends Fragment {
         WeatherDetailsFragment fragment = new WeatherDetailsFragment();    // создание
         Bundle args = new Bundle();
         if (simpleView != null) {
-            args.putSerializable(WConstants.WEATHER, simpleView);
+            args.putParcelable(WConstants.WEATHER, simpleView);
         }
         fragment.setArguments(args);
         return fragment;
@@ -125,6 +125,7 @@ public class WeatherDetailsFragment extends Fragment {
             progressBar.setVisibility(View.VISIBLE);
             Intent intent = new Intent(activity, WeatherDetailsService.class);
             intent.putExtra(WConstants.CITY_SELECTED, weatherDataFlags.getSelectedIndex());
+            intent.putExtra(WConstants.CITY_SELECTED_NAME, weatherDataFlags.getCityName());
             activity.startService(intent);
         }
     }
@@ -202,7 +203,7 @@ public class WeatherDetailsFragment extends Fragment {
     @Nullable
     public WData getWeatherDataFlags() {
         if (getArguments() != null) {
-            return (WData) getArguments().getSerializable(WConstants.WEATHER);
+            return (WData) getArguments().getParcelable(WConstants.WEATHER);
         }
         return null;
     }
