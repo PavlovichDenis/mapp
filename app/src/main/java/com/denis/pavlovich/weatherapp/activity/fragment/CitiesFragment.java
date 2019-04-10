@@ -44,22 +44,22 @@ public class CitiesFragment extends Fragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            List<String> list = null;
+            List<String> citiesList = null;
             try {
                 Bundle bundle = intent.getExtras();
                 if (bundle != null) {
-                    list = (List<String>) bundle.getSerializable(WConstants.CITIES_LIST);
+                    citiesList = (List<String>) bundle.getSerializable(WConstants.CITIES_LIST);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            configureRecycleView(getView(), list);
+            configureRecycleView(getView(), citiesList);
             progressBar.setVisibility(View.INVISIBLE);
         }
     };
 
     interface OnItemClickListener {
-        void itemClicked(int position);
+        void itemClicked(int position, String cityName);
     }
 
     @Override
@@ -72,8 +72,8 @@ public class CitiesFragment extends Fragment {
     private OnItemClickListener onClickListener = new OnItemClickListener() {
 
         @Override
-        public void itemClicked(int position) {
-            simpleView = constructSimpleView(position);
+        public void itemClicked(int position, String name) {
+            simpleView = constructSimpleView(position, name);
             showWeather(simpleView);
         }
     };
@@ -81,7 +81,7 @@ public class CitiesFragment extends Fragment {
     private Switch.OnCheckedChangeListener switchOnCheckedChangeListener = new Switch.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            simpleView = constructSimpleView(simpleView.getSelectedIndex());
+            simpleView = constructSimpleView(simpleView.getSelectedIndex(), simpleView.getCityName());
             if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
                 showWeather(simpleView);
             }
@@ -102,12 +102,13 @@ public class CitiesFragment extends Fragment {
         return view != null && ((Switch) view).isChecked();
     }
 
-    private WData constructSimpleView(int position) {
+    private WData constructSimpleView(int position, String cityName) {
         return new WData(
                 getSwitchChecked(R.id.wind),
                 getSwitchChecked(R.id.humidity),
                 getSwitchChecked(R.id.pressure),
-                position);
+                position,
+                cityName);
     }
 
     private void setSwitchListener(View view, int id) {
@@ -151,9 +152,7 @@ public class CitiesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         existsDetails = getView(R.id.fragment_params) != null;
         if (savedInstanceState != null) {
-            simpleView = (WData) savedInstanceState.getSerializable(WConstants.WEATHER);
-        } else {
-            simpleView = constructSimpleView(0);
+            simpleView = savedInstanceState.getParcelable(WConstants.WEATHER);
         }
         if (existsDetails) {
             showWeather(simpleView);
@@ -189,10 +188,13 @@ public class CitiesFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(WConstants.WEATHER, simpleView);
+        outState.putParcelable(WConstants.WEATHER, simpleView);
     }
 
     private void showWeather(WData sv) {
+        if (sv == null) {
+            return;
+        }
         if (existsDetails) {
             int selectedIndex = sv.getSelectedIndex();
             if (recyclerView != null) {

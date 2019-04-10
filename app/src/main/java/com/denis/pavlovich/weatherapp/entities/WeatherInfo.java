@@ -1,12 +1,12 @@
 package com.denis.pavlovich.weatherapp.entities;
 
 import android.content.res.Resources;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.denis.pavlovich.weatherapp.R;
 
-import java.io.Serializable;
-
-public class WeatherInfo implements Serializable {
+public class WeatherInfo implements Parcelable {
 
     private String city;
 
@@ -34,6 +34,23 @@ public class WeatherInfo implements Serializable {
 
 
     public WeatherInfo() {
+    }
+
+    private WeatherInfo(Parcel in) {
+        String[] data = new String[12];
+        in.readStringArray(data);
+        city = data[0];
+        windDirection = data[1];
+        windSpeed = data[2];
+        windSpeedUnit = data[3];
+        temperature = data[4];
+        temperatureUnit = data[5];
+        precipitation = data[6];
+        pressure = data[7];
+        pressureUnit = data[8];
+        humidity = data[9];
+        humidityUnit = data[10];
+        url = data[11];
     }
 
     public String getCity() {
@@ -171,4 +188,41 @@ public class WeatherInfo implements Serializable {
                 .append(getLineSeparator());
         return str.toString();
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(new String[]{
+                city,
+                windDirection,
+                windSpeed,
+                windSpeedUnit,
+                temperature,
+                temperatureUnit,
+                precipitation,
+                pressure,
+                pressureUnit,
+                humidity,
+                humidityUnit,
+                url
+        });
+    }
+
+    public static final Parcelable.Creator<WeatherInfo> CREATOR = new Parcelable.Creator<WeatherInfo>() {
+
+        @Override
+        public WeatherInfo createFromParcel(Parcel source) {
+            return new WeatherInfo(source);
+        }
+
+        @Override
+        public WeatherInfo[] newArray(int size) {
+            return new WeatherInfo[size];
+        }
+    };
+
 }

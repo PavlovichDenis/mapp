@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.denis.pavlovich.weatherapp.data.provider.IWDataProvider;
-import com.denis.pavlovich.weatherapp.data.provider.WResourceDataProviderImpl;
+import com.denis.pavlovich.weatherapp.data.provider.WeatherDataProviderImpl;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 
@@ -18,29 +18,26 @@ public class WeatherDetailsService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        int cityIndex = 1;
+        //int cityIndex = 1;
+        String cityName = "";
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
-                cityIndex = bundle.getInt(WConstants.CITY_SELECTED);
+                //cityIndex = bundle.getInt(WConstants.CITY_SELECTED);
+                cityName = bundle.getString(WConstants.CITY_SELECTED_NAME);
             }
         }
+
         // специально сделал, чтобы было видно ProgressBar
-        delay();
-        IWDataProvider dataProvider = new WResourceDataProviderImpl(getResources());
+        //delay();
+
+        IWDataProvider dataProvider = new WeatherDataProviderImpl(cityName);
         List<WeatherInfo> weatherInfos = dataProvider.getWeatherData();
-        if (weatherInfos != null && weatherInfos.size() >= cityIndex) {
-            WeatherInfo weatherInfo = weatherInfos.get(cityIndex);
+        if (weatherInfos != null && weatherInfos.size() > 0) {
+            WeatherInfo weatherInfo = weatherInfos.get(0);
             senDataToActivity(weatherInfo);
         }
-    }
 
-    private void delay() {
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     private void senDataToActivity(WeatherInfo weatherInfo) {
