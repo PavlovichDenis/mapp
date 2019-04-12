@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Locale;
 
 class WeatherDataLoader {
     private static final String OPEN_WEATHER_API_KEY = "f3f2763fe63803beef4851d6365c83bc";
-    private static final String OPEN_WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
+    private static final String OPEN_WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&lang=%s";
     private static final String KEY = "x-api-key";
     private static final String RESPONSE = "cod";
     private static final int ALL_GOOD = 200;
@@ -18,7 +19,8 @@ class WeatherDataLoader {
     static JSONObject getJSONData(String city) {
         BufferedReader reader = null;
         try {
-            URL url = new URL(String.format(OPEN_WEATHER_API_URL, city));
+            String lang = Locale.getDefault().getLanguage();
+            URL url = new URL(String.format(OPEN_WEATHER_API_URL, city, lang));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.addRequestProperty(KEY, OPEN_WEATHER_API_KEY);
 

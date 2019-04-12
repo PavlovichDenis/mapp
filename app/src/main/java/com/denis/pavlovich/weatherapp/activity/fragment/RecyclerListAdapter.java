@@ -36,9 +36,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     public RecyclerListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_recycler_view, viewGroup, false);
         TextView textView = view.findViewById(R.id.city_name);
-        /*textView.setBackground(viewGroup.getResources().getDrawable(
-                R.drawable.item_selector,
-                viewGroup.getContext().getTheme()));*/
         textView.setBackground(ContextCompat.getDrawable(viewGroup.getContext(), R.drawable.item_selector));
         return new RecyclerListViewHolder(view, listener);
     }

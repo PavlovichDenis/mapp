@@ -28,6 +28,15 @@
     <string name="emptyWData">Нет данных о погоде</string>
     <string name="pressureUnit">мм рт. ст.</string>
     <string name="speedUnit">м/с</string>
+    <string name="windNo">нет</string>
+    <string name="windSouthEast">юго-вост.</string>
+    <string name="windSouth">южный</string>
+    <string name="windSouthWest">юго-зап.</string>
+    <string name="windWest">западный</string>
+    <string name="windNorthWest">северо-зап.</string>
+    <string name="windNorth">северный</string>
+    <string name="windNorthEast">северо-вост.</string>
+    <string name="windEast">восточный</string>
 
     <string name="navigation_drawer_open">Открыть навигацию</string>
     <string name="navigation_drawer_close">Закрыть навигацию</string>

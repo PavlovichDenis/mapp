@@ -39,6 +39,8 @@ public class WeatherDetailsFragment extends Fragment {
 
     private ShareActionProvider actionProvider;
 
+    private View weatherDetailes;
+
     private View.OnClickListener lookWeatherInInternetListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -55,6 +57,7 @@ public class WeatherDetailsFragment extends Fragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            setVisible(weatherDetailes, false);
             try {
                 Bundle bundle = intent.getExtras();
                 if (bundle != null) {
@@ -66,7 +69,7 @@ public class WeatherDetailsFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            progressBar.setVisibility(View.INVISIBLE);
+            setVisible(progressBar, false);
         }
     };
 
@@ -116,6 +119,7 @@ public class WeatherDetailsFragment extends Fragment {
         Button button = layout.findViewById(R.id.lookWeatherInInternet);
         button.setOnClickListener(lookWeatherInInternetListener);
         progressBar = layout.findViewById(R.id.weatherProgressBar);
+        weatherDetailes = layout.findViewById(R.id.weatherDetails);
         return layout;
     }
 
@@ -142,7 +146,7 @@ public class WeatherDetailsFragment extends Fragment {
         }
     }
 
-    private void registerWeatherReciver() {
+    private void registerWeatherReceiver() {
         // регистрируем BroadcastReceiver
         IntentFilter intentFilter = new IntentFilter(
                 WConstants.SERVICE_CITY_WEATHER_RESPONSE);
@@ -161,7 +165,7 @@ public class WeatherDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        registerWeatherReciver();
+        registerWeatherReceiver();
     }
 
     @Override
@@ -198,6 +202,7 @@ public class WeatherDetailsFragment extends Fragment {
         textView.setText(String.format("%s%s%s", weatherInfo.getHumidity(), getSpace(), weatherInfo.getHumidityUnit()));
         textView = layout.findViewById(R.id.precipitationValue);
         textView.setText(weatherInfo.getPrecipitation());
+        setVisible(weatherDetailes, true);
     }
 
     @Nullable

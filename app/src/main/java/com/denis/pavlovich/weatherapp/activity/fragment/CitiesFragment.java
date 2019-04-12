@@ -23,6 +23,7 @@ import android.widget.Switch;
 import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.activity.WActivityInfo;
 import com.denis.pavlovich.weatherapp.services.CityService;
+import com.denis.pavlovich.weatherapp.services.ParcelableObjectList;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.data.WData;
 
@@ -48,7 +49,10 @@ public class CitiesFragment extends Fragment {
             try {
                 Bundle bundle = intent.getExtras();
                 if (bundle != null) {
-                    citiesList = (List<String>) bundle.getSerializable(WConstants.CITIES_LIST);
+                    ParcelableObjectList<String> objectList = bundle.getParcelable(WConstants.CITIES_LIST);
+                    if (objectList != null) {
+                        citiesList = objectList.getObjectList();
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -159,7 +163,7 @@ public class CitiesFragment extends Fragment {
         }
     }
 
-    private void registerCitiesReciver() {
+    private void registerCitiesReceiver() {
         // регистрируем BroadcastReceiver
         IntentFilter intentFilter = new IntentFilter(
                 WConstants.SERVICE_CITY_RESPONSE);
@@ -182,7 +186,7 @@ public class CitiesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        registerCitiesReciver();
+        registerCitiesReceiver();
     }
 
     @Override

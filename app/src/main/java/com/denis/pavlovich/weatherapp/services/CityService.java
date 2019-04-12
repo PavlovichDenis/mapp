@@ -23,7 +23,7 @@ public class CityService extends IntentService {
         // специально сделал, чтобы было видно ProgressBar
         delay();
         // Возхвращаем результат
-        senDataToActivity(list);
+        senDataToActivity(new ParcelableObjectList<>(list));
     }
 
     private void delay() {
@@ -44,11 +44,11 @@ public class CityService extends IntentService {
         return list;
     }
 
-    private void senDataToActivity(ArrayList<String> list) {
+    private void senDataToActivity(ParcelableObjectList<String> objects) {
         Intent responseIntent = new Intent();
         responseIntent.setAction(WConstants.SERVICE_CITY_RESPONSE);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        responseIntent.putExtra(WConstants.CITIES_LIST, list);
+        responseIntent.putExtra(WConstants.CITIES_LIST, objects);
         sendBroadcast(responseIntent);
     }
 

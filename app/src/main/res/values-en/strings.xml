@@ -29,6 +29,15 @@
     <string name="emptyWData">Empty weather data</string>
     <string name="pressureUnit">mm Hg. art.</string>
     <string name="speedUnit">m/s</string>
+    <string name="windNo">нет</string>
+    <string name="windSouthEast">south east</string>
+    <string name="windSouth">south</string>
+    <string name="windSouthWest">south west</string>
+    <string name="windWest">west</string>
+    <string name="windNorthWest">north west</string>
+    <string name="windNorth">northd</string>
+    <string name="windNorthEast">north east</string>
+    <string name="windEast">east</string>
 
     <string name="navigation_drawer_open">Open navigation</string>
     <string name="navigation_drawer_close">Close navigation</string>
