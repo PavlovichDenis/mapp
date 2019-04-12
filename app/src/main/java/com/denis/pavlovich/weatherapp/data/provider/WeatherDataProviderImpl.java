@@ -1,6 +1,10 @@
 package com.denis.pavlovich.weatherapp.data.provider;
 
 
+import android.content.Context;
+
+import com.denis.pavlovich.weatherapp.R;
+import com.denis.pavlovich.weatherapp.application.WeatherApplication;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
 
 import org.json.JSONException;
@@ -28,25 +32,25 @@ public class WeatherDataProviderImpl implements IWDataProvider {
         return weatherInfos;
     }
 
-    private String getWindDirection(int deg) {
+    private String getWindDirection(int deg, Context context) {
         if (deg == 0) {
-            return "нет";
+            return context.getString(R.string.windNo);
         } else if (deg > 0 && deg < 90) {
-            return "юв";
+            return context.getString(R.string.windSouthEast);
         } else if (deg == 90) {
-            return "ю";
+            return context.getString(R.string.windSouth);
         } else if (deg > 90 && deg < 180) {
-            return "юз";
+            return context.getString(R.string.windSouthWest);
         } else if (deg == 180) {
-            return "з";
+            return context.getString(R.string.windWest);
         } else if (deg > 180 && deg < 270) {
-            return "сз";
+            return context.getString(R.string.windNorthWest);
         } else if (deg == 270) {
-            return "c";
+            return context.getString(R.string.windNorth);
         } else if (deg > 270 && deg < 360) {
-            return "св";
+            return context.getString(R.string.windNorthEast);
         } else if (deg == 360) {
-            return "в";
+            return context.getString(R.string.windEast);
         } else return "";
     }
 
@@ -54,6 +58,7 @@ public class WeatherDataProviderImpl implements IWDataProvider {
         WeatherInfo weatherInfo = new WeatherInfo();
         if (data != null) {
             try {
+                Context context = WeatherApplication.getContext();
                 JSONObject main = data.getJSONObject("main");
                 weatherInfo.setTemperature(String.format(Locale.getDefault(), "%.2f", main.getDouble("temp")));
                 weatherInfo.setTemperatureUnit("\u2103");
@@ -62,13 +67,14 @@ public class WeatherDataProviderImpl implements IWDataProvider {
                 double pressure = main.getDouble("pressure");
                 pressure = Math.round(pressure * 0.750063755419211);
                 weatherInfo.setPressure(String.valueOf(pressure));
-                weatherInfo.setPressureUnit("мм рт.ст.");
+                weatherInfo.setPressureUnit(context.getString(R.string.pressureUnit));
                 JSONObject wind = data.getJSONObject("wind");
                 int deg = wind.getInt("deg");
-                weatherInfo.setWindSpeedUnit("м/c");
+                weatherInfo.setWindSpeedUnit(context.getString(R.string.speedUnit));
                 weatherInfo.setWindSpeed(wind.getString("speed"));
-                weatherInfo.setWindDirection(getWindDirection(deg));
-                weatherInfo.setPrecipitation(""); //осадки в JSON не нашел
+                weatherInfo.setWindDirection(getWindDirection(deg, context));
+                JSONObject weather = data.getJSONArray("weather").getJSONObject(0);
+                weatherInfo.setPrecipitation(weather.getString("description"));
                 weatherInfo.setUrl("https://www.gismeteo.ru/");
             } catch (JSONException e) {
                 e.printStackTrace();

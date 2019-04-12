@@ -57,7 +57,7 @@
     <style name="infoCities">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">left</item>
+        <item name="android:gravity">center_horizontal</item>
         <item name="android:paddingStart">@dimen/sp10</item>
         <item name="android:textSize">@dimen/sp30</item>
     </style>
