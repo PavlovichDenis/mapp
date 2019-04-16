@@ -69,7 +69,12 @@ public class WeatherDataProviderImpl implements IWDataProvider {
                 weatherInfo.setPressure(String.valueOf(pressure));
                 weatherInfo.setPressureUnit(context.getString(R.string.pressureUnit));
                 JSONObject wind = data.getJSONObject("wind");
-                int deg = wind.getInt("deg");
+
+                int deg = 0;
+                try {
+                    deg = wind.getInt("deg");
+                } catch (JSONException e) {
+                }
                 weatherInfo.setWindSpeedUnit(context.getString(R.string.speedUnit));
                 weatherInfo.setWindSpeed(wind.getString("speed"));
                 weatherInfo.setWindDirection(getWindDirection(deg, context));

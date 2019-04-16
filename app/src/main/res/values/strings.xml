@@ -28,7 +28,7 @@
     <string name="emptyWData">Нет данных о погоде</string>
     <string name="pressureUnit">мм рт. ст.</string>
     <string name="speedUnit">м/с</string>
-    <string name="windNo">нет</string>
+    <string name="windNo">""</string>
     <string name="windSouthEast">юго-вост.</string>
     <string name="windSouth">южный</string>
     <string name="windSouthWest">юго-зап.</string>
