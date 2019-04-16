@@ -39,7 +39,7 @@ public class WeatherDetailsFragment extends Fragment {
 
     private ShareActionProvider actionProvider;
 
-    private View weatherDetailes;
+    private View weatherDetails;
 
     private View.OnClickListener lookWeatherInInternetListener = new View.OnClickListener() {
         @Override
@@ -57,7 +57,7 @@ public class WeatherDetailsFragment extends Fragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            setVisible(weatherDetailes, false);
+            setVisible(weatherDetails, false);
             try {
                 Bundle bundle = intent.getExtras();
                 if (bundle != null) {
@@ -119,7 +119,7 @@ public class WeatherDetailsFragment extends Fragment {
         Button button = layout.findViewById(R.id.lookWeatherInInternet);
         button.setOnClickListener(lookWeatherInInternetListener);
         progressBar = layout.findViewById(R.id.weatherProgressBar);
-        weatherDetailes = layout.findViewById(R.id.weatherDetails);
+        weatherDetails = layout.findViewById(R.id.weatherDetails);
         return layout;
     }
 
@@ -202,7 +202,7 @@ public class WeatherDetailsFragment extends Fragment {
         textView.setText(String.format("%s%s%s", weatherInfo.getHumidity(), getSpace(), weatherInfo.getHumidityUnit()));
         textView = layout.findViewById(R.id.precipitationValue);
         textView.setText(weatherInfo.getPrecipitation());
-        setVisible(weatherDetailes, true);
+        setVisible(weatherDetails, true);
     }
 
     @Nullable

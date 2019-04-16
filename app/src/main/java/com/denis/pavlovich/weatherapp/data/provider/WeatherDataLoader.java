@@ -1,5 +1,7 @@
 package com.denis.pavlovich.weatherapp.data.provider;
 
+import com.denis.pavlovich.weatherapp.utils.WConstants;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -7,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Locale;
 
 class WeatherDataLoader {
@@ -20,7 +23,7 @@ class WeatherDataLoader {
         BufferedReader reader = null;
         try {
             String lang = Locale.getDefault().getLanguage();
-            URL url = new URL(String.format(OPEN_WEATHER_API_URL, city, lang));
+            URL url = new URL(String.format(OPEN_WEATHER_API_URL, URLEncoder.encode(city, WConstants.UTF_8), lang));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.addRequestProperty(KEY, OPEN_WEATHER_API_KEY);
 

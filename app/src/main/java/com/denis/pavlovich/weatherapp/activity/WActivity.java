@@ -71,12 +71,17 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         setTheme(getApplicationTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //toolbar здесь определяется, чтобы использовать его в двух последующих вызовах методов
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        configureDrawerLayout(toolbar);
+        configureContextMenu();
+        configureSensors();
+    }
+
+    private void configureContextMenu() {
         View view = findViewById(R.id.wetherText);
         registerForContextMenu(view);
-        configureDrawerLayout(toolbar);
-        configureSensors();
     }
 
     private void configureDrawerLayout(Toolbar toolbar) {
@@ -93,8 +98,10 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         tempView = findViewById(R.id.currTemperature);
         humView = findViewById(R.id.currHumidity);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sensorHumidity = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
-        sensorTemperature = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        if (sensorManager != null) {
+            sensorHumidity = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
+            sensorTemperature = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        }
         hideTextViewIfNeed(sensorTemperature, tempView);
         hideTextViewIfNeed(sensorHumidity, humView);
     }
