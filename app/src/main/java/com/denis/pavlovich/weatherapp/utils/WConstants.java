@@ -5,11 +5,10 @@ public final class WConstants {
     public static final String ACTUAL_THEME = "actualTheme";
 
     public static final String TEXT_PLAIN = "text/plain";
-    public static final String UTF_8 = "UTF-8";
 
     public static String WEATHER = "weather";
 
-    public static String TAG = "WeatherApp";
+    static String TAG = "WeatherApp";
 
     public static String APP_PREFERENCES = "weatherAppSettings";
 

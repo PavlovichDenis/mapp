@@ -9,5 +9,6 @@ import java.util.List;
  *
  */
 public interface IWDataProvider {
+
     List<WeatherInfo> getWeatherData();
 }
