@@ -4,13 +4,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
 import com.denis.pavlovich.weatherapp.utils.WConstants;
-import com.denis.pavlovich.weatherapp.utils.WLogging;
 
 public abstract class WAbstractActivity extends AppCompatActivity {
-
-    private String getMessage(String method) {
-        return this.getClass().getSimpleName() + " " + method;
-    }
 
     @Override
     protected void onStart() {

@@ -5,10 +5,11 @@ import android.content.Context;
 
 import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.application.WeatherApplication;
+import com.denis.pavlovich.weatherapp.data.provider.rest.entities.MainModel;
+import com.denis.pavlovich.weatherapp.data.provider.rest.entities.WeatherModel;
+import com.denis.pavlovich.weatherapp.data.provider.rest.entities.WeatherResponseModel;
+import com.denis.pavlovich.weatherapp.data.provider.rest.entities.WindModel;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,8 @@ public class WeatherDataProviderImpl implements IWDataProvider {
     @Override
     public List<WeatherInfo> getWeatherData() {
         List<WeatherInfo> weatherInfos = new ArrayList<>();
-        JSONObject data = WeatherDataLoader.getJSONData(city);
-        WeatherInfo weatherInfo = processJSONData(data);
+        WeatherResponseModel data = WeatherDataLoader.getWeatherData(city);
+        WeatherInfo weatherInfo = processData(data);
         weatherInfo.setCity(city);
         weatherInfos.add(weatherInfo);
         return weatherInfos;
@@ -54,36 +55,27 @@ public class WeatherDataProviderImpl implements IWDataProvider {
         } else return "";
     }
 
-    private WeatherInfo processJSONData(JSONObject data) {
+    private WeatherInfo processData(WeatherResponseModel data) {
         WeatherInfo weatherInfo = new WeatherInfo();
         if (data != null) {
-            try {
-                Context context = WeatherApplication.getContext();
-                JSONObject main = data.getJSONObject("main");
-                weatherInfo.setTemperature(String.format(Locale.getDefault(), "%.2f", main.getDouble("temp")));
-                weatherInfo.setTemperatureUnit("\u2103");
-                weatherInfo.setHumidity(main.getString("humidity"));
-                weatherInfo.setHumidityUnit("%");
-                double pressure = main.getDouble("pressure");
-                pressure = Math.round(pressure * 0.750063755419211);
-                weatherInfo.setPressure(String.valueOf(pressure));
-                weatherInfo.setPressureUnit(context.getString(R.string.pressureUnit));
-                JSONObject wind = data.getJSONObject("wind");
-
-                int deg = 0;
-                try {
-                    deg = wind.getInt("deg");
-                } catch (JSONException e) {
-                }
-                weatherInfo.setWindSpeedUnit(context.getString(R.string.speedUnit));
-                weatherInfo.setWindSpeed(wind.getString("speed"));
-                weatherInfo.setWindDirection(getWindDirection(deg, context));
-                JSONObject weather = data.getJSONArray("weather").getJSONObject(0);
-                weatherInfo.setPrecipitation(weather.getString("description"));
-                weatherInfo.setUrl("https://www.gismeteo.ru/");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Context context = WeatherApplication.getContext();
+            MainModel main = data.getMain();
+            weatherInfo.setTemperature(String.format(Locale.getDefault(), "%.2f", main.getTemp()));
+            weatherInfo.setTemperatureUnit("\u2103");
+            weatherInfo.setHumidity(String.valueOf(main.getHumidity()));
+            weatherInfo.setHumidityUnit("%");
+            double pressure = main.getPressure();
+            pressure = Math.round(pressure * 0.750063755419211);
+            weatherInfo.setPressure(String.valueOf(pressure));
+            weatherInfo.setPressureUnit(context.getString(R.string.pressureUnit));
+            WindModel wind = data.getWind();
+            int deg = Math.round(wind.getDeg());
+            weatherInfo.setWindSpeedUnit(context.getString(R.string.speedUnit));
+            weatherInfo.setWindSpeed(String.valueOf(wind.getSpeed()));
+            weatherInfo.setWindDirection(getWindDirection(deg, context));
+            WeatherModel weather = data.getWeather()[0];
+            weatherInfo.setPrecipitation(weather.getDescription());
+            weatherInfo.setUrl("https://www.gismeteo.ru/");
         }
         return weatherInfo;
     }
