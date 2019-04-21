@@ -9,26 +9,29 @@ import com.denis.pavlovich.weatherapp.data.provider.rest.entities.MainModel;
 import com.denis.pavlovich.weatherapp.data.provider.rest.entities.WeatherModel;
 import com.denis.pavlovich.weatherapp.data.provider.rest.entities.WeatherResponseModel;
 import com.denis.pavlovich.weatherapp.data.provider.rest.entities.WindModel;
+import com.denis.pavlovich.weatherapp.entities.City;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class WeatherDataProviderImpl implements IWDataProvider {
 
-    private String city;
+    private City city;
 
-    public WeatherDataProviderImpl(String city) {
+    public WeatherDataProviderImpl(City city) {
         this.city = city;
     }
 
     @Override
     public List<WeatherInfo> getWeatherData() {
         List<WeatherInfo> weatherInfos = new ArrayList<>();
-        WeatherResponseModel data = WeatherDataLoader.getWeatherData(city);
+        WeatherResponseModel data = WeatherDataLoader.getWeatherData(city.getName());
         WeatherInfo weatherInfo = processData(data);
-        weatherInfo.setCity(city);
+        weatherInfo.setCity(city.getName());
+        weatherInfo.setCityId(city.getId());
         weatherInfos.add(weatherInfo);
         return weatherInfos;
     }
@@ -75,6 +78,7 @@ public class WeatherDataProviderImpl implements IWDataProvider {
             weatherInfo.setWindDirection(getWindDirection(deg, context));
             WeatherModel weather = data.getWeather()[0];
             weatherInfo.setPrecipitation(weather.getDescription());
+            weatherInfo.setWeatherDate(new Date());
             weatherInfo.setUrl("https://www.gismeteo.ru/");
         }
         return weatherInfo;

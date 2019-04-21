@@ -1,5 +1,6 @@
 package com.denis.pavlovich.weatherapp.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -8,16 +9,21 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.denis.pavlovich.weatherapp.R;
+import com.denis.pavlovich.weatherapp.data.database.repository.CityRepository;
+import com.denis.pavlovich.weatherapp.entities.City;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.view.UnitTextView;
 
@@ -66,14 +72,19 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         }
     };
 
+
+    private Toolbar configureToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        return toolbar;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(getApplicationTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //toolbar здесь определяется, чтобы использовать его в двух последующих вызовах методов
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar = configureToolbar();
         configureDrawerLayout(toolbar);
         configureContextMenu();
         configureSensors();
@@ -152,6 +163,31 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         startActivity(intent);
     }
 
+    private void showAddCity() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage(R.string.inputCityName);
+        final TextInputEditText input = new TextInputEditText(this);
+        alert.setView(input);
+        alert.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+        alert.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Editable editable = input.getText();
+                if (editable != null) {
+                    String value = editable.toString().trim();
+                    if (value.length() > 0) {
+                        CityRepository.getInstance().add(new City(null, value));
+                        recreate();
+                    }
+                }
+            }
+        });
+        alert.show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -163,6 +199,9 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
                 break;
             case android.R.id.home:
                 onBackPressed();
+                break;
+            case R.id.actionAddCity:
+                showAddCity();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

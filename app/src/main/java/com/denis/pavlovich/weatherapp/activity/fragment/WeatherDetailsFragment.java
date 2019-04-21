@@ -29,6 +29,9 @@ import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.utils.WLogging;
 import com.denis.pavlovich.weatherapp.data.WData;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class WeatherDetailsFragment extends Fragment {
 
     private WData weatherDataFlags;
@@ -128,8 +131,7 @@ public class WeatherDetailsFragment extends Fragment {
         if (activity != null) {
             progressBar.setVisibility(View.VISIBLE);
             Intent intent = new Intent(activity, WeatherDetailsService.class);
-            intent.putExtra(WConstants.CITY_SELECTED, weatherDataFlags.getSelectedIndex());
-            intent.putExtra(WConstants.CITY_SELECTED_NAME, weatherDataFlags.getCityName());
+            intent.putExtra(WConstants.CITY_SELECTED, weatherDataFlags.getCity());
             activity.startService(intent);
         }
     }
@@ -186,7 +188,10 @@ public class WeatherDetailsFragment extends Fragment {
         }
         TextView textView = layout.findViewById(R.id.cityName);
         textView.setText(weatherInfo.getCity());
-        // устанавлиаем идимость элементов
+        textView = layout.findViewById(R.id.weatherDate);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(WConstants.DATE_FORMAT, Locale.getDefault());
+        textView.setText(simpleDateFormat.format(weatherInfo.getWeatherDate()));
+        // устанавлиаем идимость элементовk
         setVisible(layout.findViewById(R.id.windView), weatherDataFlags.isShowWind());
         setVisible(layout.findViewById(R.id.pressureView), weatherDataFlags.isShowPressure());
         setVisible(layout.findViewById(R.id.humidityView), weatherDataFlags.isShowHumidity());

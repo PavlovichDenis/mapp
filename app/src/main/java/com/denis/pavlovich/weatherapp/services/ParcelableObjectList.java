@@ -15,13 +15,14 @@ public class ParcelableObjectList<T> implements Parcelable {
         return 0;
     }
 
+
     private ParcelableObjectList(Parcel source) {
         objectList = new ArrayList<>();
-        source.readList(objectList, null);
+        source.readList(objectList, ParcelableObjectList.class.getClassLoader());
     }
 
-    ParcelableObjectList(List<T> citiesList) {
-        this.objectList = citiesList;
+    ParcelableObjectList(List<T> list) {
+        this.objectList = list;
     }
 
     public List<T> getObjectList() {

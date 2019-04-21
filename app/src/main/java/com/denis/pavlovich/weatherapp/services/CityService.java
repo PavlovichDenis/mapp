@@ -4,12 +4,10 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-import com.denis.pavlovich.weatherapp.data.provider.IWDataProvider;
-import com.denis.pavlovich.weatherapp.data.provider.WResourceDataProviderImpl;
-import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
+import com.denis.pavlovich.weatherapp.data.database.repository.CityRepository;
+import com.denis.pavlovich.weatherapp.entities.City;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CityService extends IntentService {
@@ -19,7 +17,7 @@ public class CityService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         //Здесь будем получать список городов. Возможно даже с фильтром
-        ArrayList<String> list = getCitiesList();
+        List<City> list = getCitiesList();
         // специально сделал, чтобы было видно ProgressBar
         delay();
         // Возхвращаем результат
@@ -28,23 +26,17 @@ public class CityService extends IntentService {
 
     private void delay() {
         try {
-            Thread.sleep(1500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private ArrayList<String> getCitiesList() {
-        IWDataProvider dataProvider = new WResourceDataProviderImpl(getResources());
-        List<WeatherInfo> weatherInfos = dataProvider.getWeatherData();
-        ArrayList<String> list = new ArrayList<>();
-        for (WeatherInfo wi : weatherInfos) {
-            list.add(wi.getCity());
-        }
-        return list;
+    private List<City> getCitiesList() {
+        return CityRepository.getInstance().getAllCities();
     }
 
-    private void senDataToActivity(ParcelableObjectList<String> objects) {
+    private void senDataToActivity(ParcelableObjectList<City> objects) {
         Intent responseIntent = new Intent();
         responseIntent.setAction(WConstants.SERVICE_CITY_RESPONSE);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);

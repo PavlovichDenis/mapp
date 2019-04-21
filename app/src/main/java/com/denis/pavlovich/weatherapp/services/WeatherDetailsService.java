@@ -3,10 +3,13 @@ package com.denis.pavlovich.weatherapp.services;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.denis.pavlovich.weatherapp.data.database.repository.WeatherInfoRepository;
 import com.denis.pavlovich.weatherapp.data.provider.IWDataProvider;
 import com.denis.pavlovich.weatherapp.data.provider.WeatherDataProviderImpl;
+import com.denis.pavlovich.weatherapp.entities.City;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 
@@ -14,25 +17,32 @@ import java.util.List;
 
 public class WeatherDetailsService extends IntentService {
 
-    public static final String WETHER_DETAILS_SERVICE = "WetherDetailsService";
+    public static final String WEATHER_DETAILS_SERVICE = "WeatherDetailsService";
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        String cityName = "";
+        City city = null;
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
-                cityName = bundle.getString(WConstants.CITY_SELECTED_NAME);
+                city = bundle.getParcelable(WConstants.CITY_SELECTED);
             }
         }
 
-        IWDataProvider dataProvider = new WeatherDataProviderImpl(cityName);
+        IWDataProvider dataProvider = new WeatherDataProviderImpl(city);
         List<WeatherInfo> weatherInfos = dataProvider.getWeatherData();
         if (weatherInfos != null && weatherInfos.size() > 0) {
             WeatherInfo weatherInfo = weatherInfos.get(0);
+            if (weatherInfo.getWeatherDate() != null) {
+                // Удалось получить данные
+                saveDataToDB(weatherInfo);
+            }
             senDataToActivity(weatherInfo);
         }
+    }
 
+    private void saveDataToDB(@NonNull WeatherInfo weatherInfo) {
+        WeatherInfoRepository.getInstance().add(weatherInfo);
     }
 
     private void senDataToActivity(WeatherInfo weatherInfo) {
@@ -44,6 +54,6 @@ public class WeatherDetailsService extends IntentService {
     }
 
     public WeatherDetailsService() {
-        super(WETHER_DETAILS_SERVICE);
+        super(WEATHER_DETAILS_SERVICE);
     }
 }
