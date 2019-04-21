@@ -62,6 +62,10 @@
         <item name="android:textSize">@dimen/sp30</item>
     </style>
 
+    <style name="infoCities.infoCitiesD">
+        <item name="android:textSize">@dimen/sp18</item>
+    </style>
+
     <style name="infoWeatherParameter">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

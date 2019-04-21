@@ -7,8 +7,14 @@
     <string name="cities">Погода в городе</string>
     <string name="actionTheme">Тема</string>
     <string name="actionAbout">О программе</string>
+    <string name="actionAddCity">Добавить город</string>
     <string name="aboutText">v 1.0</string>
     <string name="author">© Павлович Денис</string>
+    <string name="inputCityName">Введите название города</string>
+    <string name="yes">Да</string>
+    <string name="no">Отмена</string>
+    <string name="delete">Удаление</string>
+    <string name="confirmDelete">Вы действительно ходите удалить %s?</string>
 
     <string name="temperature">"Температура:"</string>
     <string name="precipitation">"Осадки           :"</string>

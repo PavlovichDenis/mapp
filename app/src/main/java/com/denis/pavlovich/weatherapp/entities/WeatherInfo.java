@@ -6,6 +6,8 @@ import android.os.Parcelable;
 
 import com.denis.pavlovich.weatherapp.R;
 
+import java.util.Date;
+
 public class WeatherInfo implements Parcelable {
 
     private String city;
@@ -32,6 +34,11 @@ public class WeatherInfo implements Parcelable {
 
     private String url;
 
+    private Long id;
+
+    private Long cityId;
+
+    private Date weatherDate;
 
     public WeatherInfo() {
     }
@@ -51,6 +58,10 @@ public class WeatherInfo implements Parcelable {
         humidity = data[9];
         humidityUnit = data[10];
         url = data[11];
+        weatherDate = new Date(in.readLong());
+        id = in.readLong();
+        cityId = in.readLong();
+
     }
 
     public String getCity() {
@@ -157,6 +168,30 @@ public class WeatherInfo implements Parcelable {
         return res.getString(id) + " ";
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public Date getWeatherDate() {
+        return weatherDate;
+    }
+
+    public void setWeatherDate(Date weatherDate) {
+        this.weatherDate = weatherDate;
+    }
+
     public String getViewText(Resources res) {
         StringBuilder str = new StringBuilder();
         str.append(getCity())
@@ -210,6 +245,15 @@ public class WeatherInfo implements Parcelable {
                 humidityUnit,
                 url
         });
+        if (weatherDate != null) {
+            dest.writeLong(weatherDate.getTime());
+        }
+        if (id != null) {
+            dest.writeLong(id);
+        }
+        if (cityId != null) {
+            dest.writeLong(cityId);
+        }
     }
 
     public static final Parcelable.Creator<WeatherInfo> CREATOR = new Parcelable.Creator<WeatherInfo>() {

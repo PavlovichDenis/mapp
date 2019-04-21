@@ -3,6 +3,8 @@ package com.denis.pavlovich.weatherapp.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.denis.pavlovich.weatherapp.entities.City;
+
 public class WData implements Parcelable {
 
     //показывать ветер
@@ -14,16 +16,13 @@ public class WData implements Parcelable {
     //показывать давление
     private boolean showPressure;
 
-    private int selectedIndex;
+    private City city;
 
-    private String cityName;
-
-    public WData(boolean showWind, boolean showHumidity, boolean showPressure, int selectedIndex, String cityName) {
+    public WData(boolean showWind, boolean showHumidity, boolean showPressure, City city) {
         this.showWind = showWind;
         this.showHumidity = showHumidity;
         this.showPressure = showPressure;
-        this.selectedIndex = selectedIndex;
-        this.cityName = cityName;
+        this.city = city;
     }
 
     private WData(Parcel in) {
@@ -32,8 +31,7 @@ public class WData implements Parcelable {
         showHumidity = data[0];
         showPressure = data[1];
         showWind = data[2];
-        selectedIndex = in.readInt();
-        cityName = in.readString();
+        city = in.readParcelable(WData.class.getClassLoader());
     }
 
     public boolean isShowWind() {
@@ -48,12 +46,12 @@ public class WData implements Parcelable {
         return showPressure;
     }
 
-    public int getSelectedIndex() {
-        return selectedIndex;
+    public City getCity() {
+        return city;
     }
 
-    public String getCityName() {
-        return cityName;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override
@@ -64,8 +62,7 @@ public class WData implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeBooleanArray(new boolean[]{showHumidity, showPressure, showWind});
-        dest.writeInt(selectedIndex);
-        dest.writeString(cityName);
+        dest.writeParcelable(city, flags);
     }
 
     public static final Parcelable.Creator<WData> CREATOR = new Parcelable.Creator<WData>() {

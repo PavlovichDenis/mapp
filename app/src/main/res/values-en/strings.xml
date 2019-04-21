@@ -7,9 +7,15 @@
     <string name="showHumidityText">Show humidity</string>
     <string name="cities">The weather in city</string>
     <string name="actionTheme">Theme</string>
-    <string name="actionAbout">About programm</string>
+    <string name="actionAbout">About program</string>
+    <string name="actionAddCity">Add city</string>
     <string name="aboutText">v 1.0</string>
     <string name="author">© Pavlovich Denis</string>
+    <string name="inputCityName">Input city name</string>
+    <string name="yes">OK</string>
+    <string name="no">Cancel</string>
+    <string name="delete">Deleting</string>
+    <string name="confirmDelete">Do you really wont to delete %s?</string>
 
     <string name="temperature">"Temperature:"</string>
     <string name="precipitation">"Precipitation:"</string>

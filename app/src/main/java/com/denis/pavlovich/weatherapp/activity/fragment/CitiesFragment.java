@@ -22,6 +22,7 @@ import android.widget.Switch;
 
 import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.activity.WActivityInfo;
+import com.denis.pavlovich.weatherapp.entities.City;
 import com.denis.pavlovich.weatherapp.services.CityService;
 import com.denis.pavlovich.weatherapp.services.ParcelableObjectList;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
@@ -37,19 +38,17 @@ public class CitiesFragment extends Fragment {
 
     private WData simpleView;
 
-    private RecyclerView recyclerView;
-
     private ProgressBar progressBar;
 
     final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            List<String> citiesList = null;
+            List<City> citiesList = null;
             try {
                 Bundle bundle = intent.getExtras();
                 if (bundle != null) {
-                    ParcelableObjectList<String> objectList = bundle.getParcelable(WConstants.CITIES_LIST);
+                    ParcelableObjectList<City> objectList = bundle.getParcelable(WConstants.CITIES_LIST);
                     if (objectList != null) {
                         citiesList = objectList.getObjectList();
                     }
@@ -63,7 +62,7 @@ public class CitiesFragment extends Fragment {
     };
 
     interface OnItemClickListener {
-        void itemClicked(int position, String cityName);
+        void itemClicked(City city);
     }
 
     @Override
@@ -76,8 +75,8 @@ public class CitiesFragment extends Fragment {
     private OnItemClickListener onClickListener = new OnItemClickListener() {
 
         @Override
-        public void itemClicked(int position, String name) {
-            simpleView = constructSimpleView(position, name);
+        public void itemClicked(City city) {
+            simpleView = constructSimpleView(city);
             showWeather(simpleView);
         }
     };
@@ -85,7 +84,7 @@ public class CitiesFragment extends Fragment {
     private Switch.OnCheckedChangeListener switchOnCheckedChangeListener = new Switch.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            simpleView = constructSimpleView(simpleView.getSelectedIndex(), simpleView.getCityName());
+            simpleView = constructSimpleView(simpleView.getCity());
             if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
                 showWeather(simpleView);
             }
@@ -106,13 +105,12 @@ public class CitiesFragment extends Fragment {
         return view != null && ((Switch) view).isChecked();
     }
 
-    private WData constructSimpleView(int position, String cityName) {
+    private WData constructSimpleView(City city) {
         return new WData(
                 getSwitchChecked(R.id.wind),
                 getSwitchChecked(R.id.humidity),
                 getSwitchChecked(R.id.pressure),
-                position,
-                cityName);
+                city);
     }
 
     private void setSwitchListener(View view, int id) {
@@ -140,11 +138,11 @@ public class CitiesFragment extends Fragment {
         }
     }
 
-    private void configureRecycleView(@Nullable View view, List<String> citiesList) {
+    private void configureRecycleView(@Nullable View view, List<City> citiesList) {
         if (view == null || citiesList == null) {
             return;
         }
-        recyclerView = view.findViewById(R.id.cities);
+        RecyclerView recyclerView = view.findViewById(R.id.cities);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         RecyclerListAdapter adapter = new RecyclerListAdapter(citiesList, onClickListener);
@@ -200,10 +198,6 @@ public class CitiesFragment extends Fragment {
             return;
         }
         if (existsDetails) {
-            int selectedIndex = sv.getSelectedIndex();
-            if (recyclerView != null) {
-                recyclerView.smoothScrollToPosition(selectedIndex);
-            }
             WeatherDetailsFragment wd = WeatherDetailsFragment.init(sv);
             FragmentManager fm = getFragmentManager();
             if (fm != null) {
