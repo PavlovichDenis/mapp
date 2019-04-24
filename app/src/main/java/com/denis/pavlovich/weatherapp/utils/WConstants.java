@@ -20,9 +20,11 @@ public final class WConstants {
 
     public static String CITY_WEATHER_DATA = "cityWeatherData";
 
+    public static String FAVORITE_CITY_ID = "favoriteCityId";
+
     public static String SERVICE_CITY_RESPONSE = "com.denis.pavlovich.weatherapp.activity.CityResponse";
 
-    public static String SERVICE_CITY_WEATHER_RESPONSE = "com.denis.pavlovich.weatherapp.activity.CityResponse";
+    public static String SERVICE_CITY_WEATHER_RESPONSE = "com.denis.pavlovich.weatherapp.activity.CityWeatherResponse";
 
     public static final String DATE_FORMAT = "dd MMMM yyyy";
 

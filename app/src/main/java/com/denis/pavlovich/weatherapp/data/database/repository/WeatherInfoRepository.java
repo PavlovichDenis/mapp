@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import com.denis.pavlovich.weatherapp.data.database.tables.WeatherInfoTable;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
 
+import java.util.List;
+
 
 public class WeatherInfoRepository extends AbstractRepository<WeatherInfo> {
 
@@ -32,6 +34,16 @@ public class WeatherInfoRepository extends AbstractRepository<WeatherInfo> {
 
     @Override
     public void edit(@NonNull WeatherInfo obj) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<WeatherInfo> getAllList() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public WeatherInfo getById(Long id) {
         throw new UnsupportedOperationException();
     }
 

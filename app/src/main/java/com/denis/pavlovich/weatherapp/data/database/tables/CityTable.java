@@ -35,8 +35,22 @@ public class CityTable {
         return getResultFromCursor(cursor);
     }
 
+    public static City getCityById(Long cityId, SQLiteDatabase database) {
+        String[] args = {String.valueOf(cityId)};
+        Cursor cursor = database.query(TABLE_NAME, null, "id = ?", args, null, null, COLUMN_CITY_NAME);
+        List<City> list = getResultFromCursor(cursor);
+        if (list != null && list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
     public static void deleteCity(Long cityId, SQLiteDatabase database) {
         database.delete(TABLE_NAME, COLUMN_ID + " = " + cityId, null);
+    }
+
+    public static void onUpgrade(SQLiteDatabase database) {
+        database.execSQL("CREATE INDEX IF NOT EXISTS cityNameIdx on  " + TABLE_NAME + "(" + COLUMN_CITY_NAME + ")");
     }
 
 

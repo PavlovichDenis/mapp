@@ -5,7 +5,7 @@
     <string name="showPressureText">Показывать сведения о давлении</string>
     <string name="showHumidityText">Показывать сведения о влажности</string>
     <string name="cities">Погода в городе</string>
-    <string name="actionTheme">Тема</string>
+    <string name="actionTheme">Настройки</string>
     <string name="actionAbout">О программе</string>
     <string name="actionAddCity">Добавить город</string>
     <string name="aboutText">v 1.0</string>
@@ -15,6 +15,9 @@
     <string name="no">Отмена</string>
     <string name="delete">Удаление</string>
     <string name="confirmDelete">Вы действительно ходите удалить %s?</string>
+    <string name="favoriteWeather">Погода в любимом городе</string>
+    <string name="channelName">О погоде</string>
+    <string name="favoriteCity">Любимый город:</string>
 
     <string name="temperature">"Температура:"</string>
     <string name="precipitation">"Осадки           :"</string>
