@@ -1,7 +1,10 @@
 package com.denis.pavlovich.weatherapp.activity;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,10 +23,13 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.denis.pavlovich.weatherapp.R;
+import com.denis.pavlovich.weatherapp.broadcast.TimeBroadcastReceiver;
 import com.denis.pavlovich.weatherapp.data.database.repository.CityRepository;
 import com.denis.pavlovich.weatherapp.entities.City;
+import com.denis.pavlovich.weatherapp.services.CityService;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.view.UnitTextView;
 
@@ -38,6 +44,8 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
     private UnitTextView tempView;
 
     private UnitTextView humView;
+
+    private BroadcastReceiver timeBroadcastReceiver = new TimeBroadcastReceiver();
 
     private final NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new NavigationView.OnNavigationItemSelectedListener() {
@@ -128,6 +136,7 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         super.onPause();
         sensorManager.unregisterListener(listenerTemp, sensorTemperature);
         sensorManager.unregisterListener(listenerHum, sensorHumidity);
+        unregisterReceiver(timeBroadcastReceiver);
     }
 
     @Override
@@ -135,6 +144,8 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         super.onResume();
         sensorManager.registerListener(listenerTemp, sensorTemperature, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(listenerHum, sensorHumidity, SensorManager.SENSOR_DELAY_NORMAL);
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_TIME_TICK);
+        registerReceiver(timeBroadcastReceiver, intentFilter);
     }
 
     @Override
@@ -179,8 +190,12 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
                 if (editable != null) {
                     String value = editable.toString().trim();
                     if (value.length() > 0) {
+                        Activity activity = WActivity.this;
                         CityRepository.getInstance().add(new City(null, value));
-                        recreate();
+                        ProgressBar progressBar = activity.findViewById(R.id.cityProgressBar);
+                        progressBar.setVisibility(View.VISIBLE);
+                        Intent intent = new Intent(activity, CityService.class);
+                        activity.startService(intent);
                     }
                 }
             }

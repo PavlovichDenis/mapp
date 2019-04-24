@@ -18,22 +18,11 @@ public class CityService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         //Здесь будем получать список городов. Возможно даже с фильтром
         List<City> list = getCitiesList();
-        // специально сделал, чтобы было видно ProgressBar
-        delay();
-        // Возхвращаем результат
         senDataToActivity(new ParcelableObjectList<>(list));
     }
 
-    private void delay() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     private List<City> getCitiesList() {
-        return CityRepository.getInstance().getAllCities();
+        return CityRepository.getInstance().getAllList();
     }
 
     private void senDataToActivity(ParcelableObjectList<City> objects) {

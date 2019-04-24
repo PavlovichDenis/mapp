@@ -11,7 +11,7 @@ import com.denis.pavlovich.weatherapp.data.database.tables.WeatherInfoTable;
 public class DataBaseProvider extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "weatherApplication.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static DataBaseProvider dataBaseProvider;
 
@@ -35,8 +35,8 @@ public class DataBaseProvider extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
-            // TODO
-            System.out.println("todo");
+            CityTable.onUpgrade(db);
+            WeatherInfoTable.onUpgrade(db);
         }
     }
 }

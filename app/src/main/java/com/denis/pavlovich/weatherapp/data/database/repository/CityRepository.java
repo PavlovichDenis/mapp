@@ -39,8 +39,13 @@ public class CityRepository extends AbstractRepository<City> {
        throw new UnsupportedOperationException();
     }
 
-    public List<City> getAllCities() {
+    @Override
+    public List<City> getAllList() {
         return CityTable.getAllCities(getDatabase());
     }
 
+    @Override
+    public City getById(Long id) {
+        return CityTable.getCityById(id, getDatabase());
+    }
 }

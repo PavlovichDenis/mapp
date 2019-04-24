@@ -64,6 +64,10 @@ public class WeatherInfoTable {
         weatherInfo.setId(id);
     }
 
+    public static void onUpgrade(SQLiteDatabase database) {
+        database.execSQL("CREATE INDEX IF NOT EXISTS cityIdIdx on  " + TABLE_NAME + "(" + COLUMN_CITY_ID + ")");
+    }
+
     public static List<WeatherInfo> getAllWeatherByCityId(Long cityId, SQLiteDatabase database) {
         String[] args = {String.valueOf(cityId)};
         Cursor cursor = database.query(TABLE_NAME, null, COLUMN_CITY_ID + " = ?", args, null, null, COLUMN_DATE);

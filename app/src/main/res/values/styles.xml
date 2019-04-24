@@ -32,11 +32,11 @@
     </style>
 
     <style name="settingsRadioGroup">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
         <item name="android:paddingTop">@dimen/sp10</item>
-        <item name="android:paddingLeft">@dimen/sp10</item>
+        <item name="android:paddingStart">@dimen/sp10</item>
         <item name="android:orientation">vertical</item>
     </style>
 
@@ -45,13 +45,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:checked">true</item>
         <item name="android:paddingTop">@dimen/sp10</item>
-        <item name="android:paddingLeft">@dimen/sp10</item>
-        <item name="android:textSize">@dimen/sp16</item>
+        <item name="android:paddingStart">@dimen/sp10</item>
+        <item name="android:textSize">@dimen/sp18</item>
     </style>
 
     <style name="settingsRadioButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sp18</item>
     </style>
 
     <style name="infoCities">
@@ -69,7 +70,7 @@
     <style name="infoWeatherParameter">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/sp10</item>
+        <item name="android:paddingStart">@dimen/sp10</item>
         <item name="android:textSize">@dimen/sp20</item>
     </style>
 
@@ -113,7 +114,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">@dimen/sp02</item>
-        <item name="android:paddingLeft">@dimen/sp10</item>
+        <item name="android:paddingStart">@dimen/sp10</item>
         <item name="android:paddingRight">@dimen/sp10</item>
     </style>
 
@@ -137,6 +138,29 @@
     <style name="ToolbarStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
+    </style>
+
+    <style name="spinnerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingTop">@dimen/sp10</item>
+        <item name="android:paddingStart">@dimen/sp10</item>
+        <item name="android:textSize">@dimen/sp30</item>
+    </style>
+
+    <style name="spinnerItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:gravity">start</item>
+        <item name="android:paddingTop">@dimen/sp10</item>
+        <item name="android:paddingStart">@dimen/sp10</item>
+    </style>
+
+    <style name="spinnerItemStyle.D">
+        <item name="android:paddingTop">@dimen/sp10</item>
+        <item name="android:paddingStart">@dimen/sp10</item>
     </style>
 
 </resources>

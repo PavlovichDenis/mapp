@@ -56,4 +56,17 @@ public abstract class WAbstractActivity extends AppCompatActivity {
                 WConstants.APP_PREFERENCES, MODE_PRIVATE);
         return sharedPreferences.getInt(key, 0);
     }
+    protected void savePreferences(String key, Long value) {
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                WConstants.APP_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(key, value);
+        editor.apply();
+    }
+
+    protected Long getLongPreferences(String key) {
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                WConstants.APP_PREFERENCES, MODE_PRIVATE);
+        return sharedPreferences.getLong(key, 0);
+    }
 }
