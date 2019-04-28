@@ -137,6 +137,7 @@ public class CitiesFragment extends Fragment {
         setSwitchListener(view, R.id.humidity);
         setSwitchListener(view, R.id.pressure);
         progressBar = view.findViewById(R.id.cityProgressBar);
+        registerCitiesReceiver();
         getCitiesList();
         if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {

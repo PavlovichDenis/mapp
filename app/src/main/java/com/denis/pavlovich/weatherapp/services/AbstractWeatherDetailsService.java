@@ -35,6 +35,7 @@ abstract class AbstractWeatherDetailsService extends IntentService {
         Intent responseIntent = new Intent();
         responseIntent.setAction(WConstants.SERVICE_CITY_WEATHER_RESPONSE);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        responseIntent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         responseIntent.putExtra(WConstants.CITY_WEATHER_DATA, weatherInfo);
         sendBroadcast(responseIntent);
     }

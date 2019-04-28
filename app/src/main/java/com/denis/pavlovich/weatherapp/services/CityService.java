@@ -29,6 +29,7 @@ public class CityService extends IntentService {
         Intent responseIntent = new Intent();
         responseIntent.setAction(WConstants.SERVICE_CITY_RESPONSE);
         responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        responseIntent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         responseIntent.putExtra(WConstants.CITIES_LIST, objects);
         sendBroadcast(responseIntent);
     }
