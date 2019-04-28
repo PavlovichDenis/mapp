@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.denis.pavlovich.weatherapp.entities.City;
+import com.denis.pavlovich.weatherapp.entities.Coordinates;
 
 public class WData implements Parcelable {
 
@@ -17,6 +18,8 @@ public class WData implements Parcelable {
     private boolean showPressure;
 
     private City city;
+
+    private Coordinates coordinates;
 
     public WData(boolean showWind, boolean showHumidity, boolean showPressure, City city) {
         this.showWind = showWind;
@@ -32,6 +35,7 @@ public class WData implements Parcelable {
         showPressure = data[1];
         showWind = data[2];
         city = in.readParcelable(WData.class.getClassLoader());
+        coordinates = in.readParcelable(WData.class.getClassLoader());
     }
 
     public boolean isShowWind() {
@@ -54,6 +58,14 @@ public class WData implements Parcelable {
         this.city = city;
     }
 
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -63,6 +75,7 @@ public class WData implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeBooleanArray(new boolean[]{showHumidity, showPressure, showWind});
         dest.writeParcelable(city, flags);
+        dest.writeParcelable(coordinates, flags);
     }
 
     public static final Parcelable.Creator<WData> CREATOR = new Parcelable.Creator<WData>() {

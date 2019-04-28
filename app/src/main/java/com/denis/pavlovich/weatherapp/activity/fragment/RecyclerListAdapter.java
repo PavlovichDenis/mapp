@@ -25,7 +25,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     private final CitiesFragment.OnItemClickListener listener;
     //поддерживаю только single select режим
-    private static int selectedPosition = 0;
+    private static int selectedPosition = -1;
     private static City selectedCity = null;
     //Чтобы избегать утечек памяти, если элемент будет из памяти удален
     private static WeakReference<? extends View> selectedItem;

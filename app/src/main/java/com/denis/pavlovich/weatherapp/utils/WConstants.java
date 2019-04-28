@@ -18,6 +18,8 @@ public final class WConstants {
 
     public static String CITY_SELECTED = "citySelected";
 
+    public static String COORDINATES_SELECTED = "coordinatesSelected";
+
     public static String CITY_WEATHER_DATA = "cityWeatherData";
 
     public static String FAVORITE_CITY_ID = "favoriteCityId";

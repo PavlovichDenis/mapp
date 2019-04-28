@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Погода</string>
-
-    <string name="showWindText">Показывать сведения о ветре</string>
-    <string name="showPressureText">Показывать сведения о давлении</string>
-    <string name="showHumidityText">Показывать сведения о влажности</string>
+    <string name="showWindText">Сведения о ветре</string>
+    <string name="showPressureText">Сведения о давлении</string>
+    <string name="showHumidityText">сведения о влажности</string>
     <string name="cities">Погода в городе</string>
     <string name="actionTheme">Настройки</string>
     <string name="actionAbout">О программе</string>
