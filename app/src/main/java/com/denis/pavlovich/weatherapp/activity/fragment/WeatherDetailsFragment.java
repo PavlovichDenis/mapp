@@ -147,6 +147,7 @@ public class WeatherDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        registerWeatherReceiver();
         weatherDataFlags = getWeatherDataFlags();
         if (weatherDataFlags != null) {
             getWeatherData();
@@ -173,14 +174,14 @@ public class WeatherDetailsFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         registerWeatherReceiver();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         Activity activity = getActivity();
         if (activity != null) {
             getActivity().unregisterReceiver(broadcastReceiver);
