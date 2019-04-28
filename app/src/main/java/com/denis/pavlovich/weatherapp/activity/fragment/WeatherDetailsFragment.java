@@ -24,7 +24,8 @@ import android.widget.TextView;
 
 import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.entities.WeatherInfo;
-import com.denis.pavlovich.weatherapp.services.WeatherDetailsService;
+import com.denis.pavlovich.weatherapp.services.CityWeatherDetailsService;
+import com.denis.pavlovich.weatherapp.services.CoordinatesWeatherDetailsService;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
 import com.denis.pavlovich.weatherapp.utils.WLogging;
 import com.denis.pavlovich.weatherapp.data.WData;
@@ -130,8 +131,15 @@ public class WeatherDetailsFragment extends Fragment {
         Activity activity = getActivity();
         if (activity != null) {
             progressBar.setVisibility(View.VISIBLE);
-            Intent intent = new Intent(activity, WeatherDetailsService.class);
-            intent.putExtra(WConstants.CITY_SELECTED, weatherDataFlags.getCity());
+            Intent intent;
+            if (weatherDataFlags.getCoordinates() == null) {
+                intent = new Intent(activity, CityWeatherDetailsService.class);
+                intent.putExtra(WConstants.CITY_SELECTED, weatherDataFlags.getCity());
+            } else {
+                //получаем данные по координатам
+                intent = new Intent(activity, CoordinatesWeatherDetailsService.class);
+                intent.putExtra(WConstants.COORDINATES_SELECTED, weatherDataFlags.getCoordinates());
+            }
             activity.startService(intent);
         }
     }

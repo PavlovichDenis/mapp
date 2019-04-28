@@ -1,5 +1,6 @@
 package com.denis.pavlovich.weatherapp.activity;
 
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
@@ -87,6 +88,7 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         return toolbar;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(getApplicationTheme());
@@ -136,7 +138,6 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         super.onPause();
         sensorManager.unregisterListener(listenerTemp, sensorTemperature);
         sensorManager.unregisterListener(listenerHum, sensorHumidity);
-        unregisterReceiver(timeBroadcastReceiver);
     }
 
     @Override
@@ -144,6 +145,21 @@ public class WActivity extends WAbstractActivityWithThemeSupport {
         super.onResume();
         sensorManager.registerListener(listenerTemp, sensorTemperature, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(listenerHum, sensorHumidity, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerTimeBroadcastReceiver();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(timeBroadcastReceiver);
+    }
+
+    private void registerTimeBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_TIME_TICK);
         registerReceiver(timeBroadcastReceiver, intentFilter);
     }

@@ -1,13 +1,20 @@
 package com.denis.pavlovich.weatherapp.activity.fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,6 +30,7 @@ import android.widget.Switch;
 import com.denis.pavlovich.weatherapp.R;
 import com.denis.pavlovich.weatherapp.activity.WActivityInfo;
 import com.denis.pavlovich.weatherapp.entities.City;
+import com.denis.pavlovich.weatherapp.entities.Coordinates;
 import com.denis.pavlovich.weatherapp.services.CityService;
 import com.denis.pavlovich.weatherapp.services.ParcelableObjectList;
 import com.denis.pavlovich.weatherapp.utils.WConstants;
@@ -34,11 +42,15 @@ import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
 public class CitiesFragment extends Fragment {
 
+    private static final int PERMISSION_REQUEST_CODE = 10;
+
     private boolean existsDetails;
 
     private WData simpleView;
 
     private ProgressBar progressBar;
+
+    private Location location = null;
 
     final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
@@ -125,8 +137,13 @@ public class CitiesFragment extends Fragment {
         setSwitchListener(view, R.id.humidity);
         setSwitchListener(view, R.id.pressure);
         progressBar = view.findViewById(R.id.cityProgressBar);
-        //configureRecycleView(view);
         getCitiesList();
+        if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            requestLocation();
+        } else {
+            requestLocationPermissions();
+        }
     }
 
     private void getCitiesList() {
@@ -173,24 +190,100 @@ public class CitiesFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        Activity activity = getActivity();
-        if (activity != null) {
-            getActivity().unregisterReceiver(broadcastReceiver);
-        }
+    public void onStart() {
+        super.onStart();
+        registerCitiesReceiver();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        registerCitiesReceiver();
+    public void onStop() {
+        super.onStop();
+        Activity activity = getActivity();
+        if (activity != null) {
+            activity.unregisterReceiver(broadcastReceiver);
+        }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(WConstants.WEATHER, simpleView);
+    }
+
+    private void requestLocation() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            return;
+        LocationManager locationManager = (LocationManager) activity.getSystemService(Activity.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        String provider = locationManager.getBestProvider(criteria, true);
+        if (provider != null) {
+            locationManager.requestLocationUpdates(provider, 0, 10, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location loc) {
+                    //чтобы один раз показывать
+                    if (location == null) {
+                        location = loc;
+                        weatherByCoordinates(location);
+                    }
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+
+                }
+            });
+        }
+    }
+
+    private void weatherByCoordinates(Location location) {
+        String latitude = Double.toString(location.getLatitude());
+        String longitude = Double.toString(location.getLongitude());
+        Coordinates coordinates = new Coordinates(latitude, longitude);
+        WData params = constructSimpleView(null);
+        params.setCoordinates(coordinates);
+        showWeather(params);
+    }
+
+    private void requestLocationPermissions() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CALL_PHONE)) {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    },
+                    PERMISSION_REQUEST_CODE);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length == 2 &&
+                    (grantResults[0] == PackageManager.PERMISSION_GRANTED || grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
+                requestLocation();
+            }
+        }
     }
 
     private void showWeather(WData sv) {

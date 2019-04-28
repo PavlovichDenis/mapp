@@ -17,6 +17,34 @@ class WeatherDataLoader {
     private static final int ALL_GOOD = 200;
 
     @Nullable
+    static WeatherResponseModel getWeatherDataByCoordinates(String lat, String lon) {
+        try {
+            String lang = Locale.getDefault().getLanguage();
+            IOpenWeather openWeatherAPI = OpenWeatherAPI.getInstance().getApi();
+            // использую execute, т.к. уже нахожусь в отдельном потоке
+            Response<WeatherResponseModel> response =
+                    openWeatherAPI.loadWeatherByCoordinates(lat, lon,
+                            OPEN_WEATHER_API_KEY,
+                            lang, METRIC).execute();
+            return processResponse(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static WeatherResponseModel processResponse(Response<WeatherResponseModel> response) {
+        if (response.isSuccessful()) {
+            WeatherResponseModel weatherModel = response.body();
+            if (weatherModel != null && weatherModel.getCod() == ALL_GOOD) {
+                return weatherModel;
+            }
+        }
+        return null;
+    }
+
+
+    @Nullable
     static WeatherResponseModel getWeatherData(String city) {
         try {
             String lang = Locale.getDefault().getLanguage();
@@ -26,12 +54,7 @@ class WeatherDataLoader {
                     openWeatherAPI.loadWeather(city,
                             OPEN_WEATHER_API_KEY,
                             lang, METRIC).execute();
-            if (response.isSuccessful()) {
-                WeatherResponseModel weatherModel = response.body();
-                if (weatherModel != null && weatherModel.getCod() == ALL_GOOD) {
-                    return weatherModel;
-                }
-            }
+            return processResponse(response);
         } catch (Exception e) {
             e.printStackTrace();
         }

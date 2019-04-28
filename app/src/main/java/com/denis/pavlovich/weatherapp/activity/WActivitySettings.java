@@ -50,8 +50,8 @@ public class WActivitySettings extends WAbstractActivityWithThemeSupport {
 
     private void setSelectedTheme(int theme) {
         setTheme(theme);
-        recreate();
         savePreferences(WConstants.APP_THEME, theme);
+        recreate();
     }
 
     private void setCheckedButton(int theme) {
